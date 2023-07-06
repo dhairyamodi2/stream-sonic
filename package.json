@@ -1,0 +1,13 @@
+{
+    "private": true,
+    "name": "stream-sonic",
+    "workspaces": [
+        "web",
+        "mobile",
+        "client",
+        "api"
+    ],
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT"
+}
