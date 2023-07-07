@@ -14,8 +14,7 @@ export const AuthCallbackService = async function(code : string | undefined) : P
         console.log(code)
         const clientId = process.env.GOOGLE_CLIENT_ID;
         const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
-        console.log(clientId);
-        console.log(clientSecret);
+        
         const googleOauth = `${GOOGLE_OAUTH_URL}?code=${code}&client_id=${clientId}&client_secret=${clientSecret}&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}&grant_type=authorization_code`;
 
 
