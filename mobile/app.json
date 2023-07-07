@@ -17,11 +17,26 @@
     "ios": {
       "supportsTablet": true
     },
+    "scheme" : "mobile",
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo-transparent-png.png",
         "backgroundColor": "black"
-      }
+      },
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "*.myapp.io",
+              "pathPrefix": "/records"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
