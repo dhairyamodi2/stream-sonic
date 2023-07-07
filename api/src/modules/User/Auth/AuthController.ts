@@ -7,6 +7,6 @@ export const AuthCallback = async function (req : Request, res : Response) {
     if(result.success == false) {
         return res.status(result.status).json(result)
     }
-    res.send(result.data);
+    res.send(result.data)
     return; 
 }

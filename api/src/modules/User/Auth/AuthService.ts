@@ -15,12 +15,17 @@ export const AuthCallbackService = async function(code : string | undefined) : P
         console.log(code)
         const clientId = process.env.GOOGLE_CLIENT_ID;
         const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
-        
+
         const googleOauth = `${GOOGLE_OAUTH_URL}?code=${code}&client_id=${clientId}&client_secret=${clientSecret}&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}&grant_type=authorization_code`;
 
 
-        const res = await axios.post(googleOauth);
-        const {id_token} : {id_token? : string} = res.data
+        const res = await fetch(googleOauth, {
+            method: 'POST',
+            headers: {
+                "Content-type" : "application/json"
+            }
+        })
+        const {id_token} : {id_token? : string} = await res.json()
         if (!id_token) {
             return {
                 status: 400,
@@ -45,11 +50,14 @@ export const AuthCallbackService = async function(code : string | undefined) : P
                 data: null
             }
         }
+        console.log(email);
+        console.log(name);
+        var data = `<script>window.location.replace("exp://192.168.1.6:19000/--/app?email=${email}&name=${name}&picture=${picture}")</script>`
         return {
             success: true,
             status: 200,
             message: '',
-            data: `<script>window.location.replace("exp://?email=${email}&name=${name}&picture=${picture}")</script>`
+            data: data
          }
 
     } catch (error) {

@@ -15,6 +15,12 @@ dotenv.config({
 
 import AuthRouter from './routes'
 app.use("/auth", AuthRouter);
+
+app.get("/", (req, res) => {
+    res.json({
+        success: true
+    })
+})
 app.listen(process.env.PORT, () => {
     log(`Server running on ${process.env.PORT}`);
 })
