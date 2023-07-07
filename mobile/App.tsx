@@ -12,14 +12,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <StatusBar style='light' backgroundColor='black'></StatusBar>
+    // <SafeAreaView style={{flex: 1}}>
+      // <StatusBar style='light' backgroundColor='black'></StatusBar>
     <NavigationContainer>
       <RootStack.Navigator screenOptions={{headerShown: false}}>
         <RootStack.Screen name='Login' component={LoginView}></RootStack.Screen>
       </RootStack.Navigator>
     </NavigationContainer>
-    </SafeAreaView>
+    // </SafeAreaView>
   );
 }
 
