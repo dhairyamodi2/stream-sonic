@@ -1,5 +1,6 @@
 import { GOOGLE_OAUTH_URL } from "../../../constants";
 import { ResponseType } from "../../../types/types"
+import axios from "axios";
 
 export const AuthCallbackService = async function(code : string | undefined) : Promise<ResponseType<any>>  {
     try {
@@ -18,13 +19,8 @@ export const AuthCallbackService = async function(code : string | undefined) : P
         const googleOauth = `${GOOGLE_OAUTH_URL}?code=${code}&client_id=${clientId}&client_secret=${clientSecret}&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}&grant_type=authorization_code`;
 
 
-        const res = await fetch(googleOauth, {
-            method: 'POST',
-            headers: {
-                "Content-type" : "application/json"
-            }
-        });
-        const {id_token} : {id_token? : string} = await res.json();
+        const res = await axios.post(googleOauth);
+        const {id_token} : {id_token? : string} = res.data
         if (!id_token) {
             return {
                 status: 400,
@@ -34,11 +30,11 @@ export const AuthCallbackService = async function(code : string | undefined) : P
             }
         }
 
-        const verifyResponse = await fetch(
+        const verifyResponse = await axios.get(
             `https://oauth2.googleapis.com/tokeninfo?id_token=${id_token}`
           );
 
-        const verifyData = await verifyResponse.json();
+        const verifyData = verifyResponse.data
 
         const {email, name, picture} : {email? : string, name? : string, picture? : string} = verifyData;
         if(!email || !name || !picture) {
