@@ -7,6 +7,6 @@ export function respond<T>(
     res : Response,
     message? : string
 ) {
-    res.status(status).json({success, data, message});
+    res.status(status).json({success, data, message: message ? message : ""});
     return;
 }
