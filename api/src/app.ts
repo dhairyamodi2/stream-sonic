@@ -14,9 +14,14 @@ dotenv.config({
 })
 import authRoutes from './modules/User/Auth/AuthRoutes';
 import userRoutes from './modules/User/user.routes';
+import trackRoutes from './modules/Tracks/tracks.routes';
+import albumsRouter from './modules/Albums/albums.routes';
+
+
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes)
-
+app.use("/tracks", trackRoutes);
+app.use("/albums", albumsRouter);
 app.get("/", (req, res) => {
     res.json({
         success: true

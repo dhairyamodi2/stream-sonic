@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -21,7 +22,8 @@ model User {
   user_type String @default("user")
   created_at DateTime @default(now()) @db.Timestamptz()
   updated_at  DateTime @updatedAt @db.Timestamptz()
-  savedAlbums Album[]
+  albums Album[]
+  savedAlbums Album[] @relation(name: "savedby")
   tracks Track[] @relation(name: "tracks")
   likes Track[]  @relation(name: "likes")
   playlists PLaylists[] 
@@ -33,9 +35,10 @@ model Track {
   track_id  String @id @default(uuid()) 
   track_name String 
   artists User[] @relation(name: "tracks")
-  created_at DateTime @db.Timestamptz()
+  created_at DateTime @db.Timestamptz() @default(now())
   updated_at DateTime @updatedAt @db.Timestamptz()
-  album Album @relation(fields: [track_id], references: [album_id]) 
+  album Album? @relation(fields: [albumId], references: [album_id], onDelete: Cascade)
+  albumId String? 
   likedBy User[] @relation(name: "likes")
   playlists PLaylists[]
 }
@@ -45,7 +48,9 @@ model Album {
   album_id String @id @default(uuid())
   album_name String
   tracks Track[] 
-  savedBy User @relation(fields: [album_id], references: [user_id])
+  savedBy User[] @relation("savedby")
+  user User @relation(fields: [userId], references: [user_id])
+  userId String
 }
 
 

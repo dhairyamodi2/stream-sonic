@@ -39,3 +39,8 @@ export function HandleUnauthorized(res : Response){
 export function HandleBadRequest(res : Response, message?: string) {
     respond<any>(400, false, null, res, message ? message : "Bad Request");
 }
+
+
+export function HandleNotFound(res : Response, message? : string) {
+    respond<any>(404, false, null, res, message ? message : "not found")
+}
