@@ -22,7 +22,7 @@ export const authenticate = async (req : Request, res : Response, next : NextFun
         console.log(token);
         const decodedPayload = verify(token, 'RANDOMKEY') as JwtPayload;
         
-        if(!decodedPayload || !decodedPayload.email || ! decodedPayload.user_id) {
+        if(!decodedPayload || !decodedPayload.user_id) {
             HandleUnauthorized(res);
             return;
         }

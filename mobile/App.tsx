@@ -10,8 +10,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Home } from './screens/Home';
 import { Onboarding } from './screens/Onboarding';
 import { Provider } from 'react-redux';
-import { store } from './store';
-import { Root } from './screens/Root';
+import { store } from 'common/src/store';
 
 
 
@@ -21,15 +20,15 @@ export default function App() {
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar style='light' backgroundColor='black'></StatusBar>
         <NavigationContainer>
-        {/* <Provider store={store}> */}
+        <Provider store={store}>
           <RootStack.Navigator screenOptions={{ headerShown: false }}>
           
-            <RootStack.Screen name='Home' component={Root}></RootStack.Screen>
+            <RootStack.Screen name='Home' component={Home}></RootStack.Screen>
             <RootStack.Screen name='Login' component={LoginView}></RootStack.Screen>
             <RootStack.Screen name='Onboarding' component={Onboarding}></RootStack.Screen>
            
           </RootStack.Navigator>
-          {/* </Provider> */}
+          </Provider>
         </NavigationContainer>
       </SafeAreaView>
     

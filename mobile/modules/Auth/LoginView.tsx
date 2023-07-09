@@ -9,6 +9,8 @@ import * as WebBrowser from 'expo-web-browser';
 import { GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } from "../../envConstants";
 import * as Linking from "expo-linking";
 import * as SecureStore from 'expo-secure-store';
+import { useDispatch } from "react-redux";
+import {setVisited} from 'common/src/modules/auth/auth.actions'
 
 type Props = NativeStackNavigationProp<RootStackParamsList>
 export const LoginView = function () {
@@ -30,6 +32,7 @@ export const LoginView = function () {
         console.log('got the result')
     }
 
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if(result && result.type === 'success') {
@@ -37,6 +40,8 @@ export const LoginView = function () {
             if(params.queryParams && params.queryParams.token) {
                 console.log(params.queryParams.token)
                 SecureStore.setItemAsync("token", params.queryParams.token as string).then((data)=> {
+                    dispatch(setVisited() as any);
+                    console.log('set visited to false')
                     navigation.navigate('Home');
                 }).catch((err) => {
                     ToastAndroid.show(err, 1000);

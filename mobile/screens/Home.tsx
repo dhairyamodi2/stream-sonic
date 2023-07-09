@@ -6,9 +6,9 @@ import { RootStackParamsList } from "../Navigation"
 import { useNavigation } from "@react-navigation/native"
 import { Props } from "../types/types"
 import { useDispatch, useSelector } from "react-redux"
-import { AuthState } from "../modules/Auth/auth.types"
-import { State } from "../store"
-import { getMe } from "client/src/modules/user/client"
+import { AuthState } from "common/src/modules/auth/auth.types"
+import { State } from "common/src/store"
+import { me } from "common/src/modules/auth/auth.actions"
 
 
 export const Home = function () {
@@ -19,29 +19,45 @@ export const Home = function () {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        console.log('from home')
+        console.log(visited);
+    }, [])
+    useEffect(() => {
         if (visited === false) {
+            console.log('dispatched');
             SecureStore.getItemAsync("token").then((item) => {
                 if(!item) {
+                    console.log('item')
+                    console.log(item);
                     navigator.navigate('Login');
                     return;
                 }
-                dispatch(getMe(item) as any)
+                dispatch(me(item) as any)
             })
         }
     }, [visited])
    
     useEffect(() => {
         if (visited === true && isAuthenticated === false && isLoading === false) {
-            navigator.navigate('Login')
+           navigator.replace('Login');
+        }
+
+        if (isAuthenticated === true) {
+            if (!user){
+                navigator.replace('Login');
+                return;
+            }
+            console.log(user.completedProfile);
+            if (user.completedProfile === false && visited === true) {
+                navigator.replace('Onboarding');
+            }
         }
     }, [isAuthenticated, isLoading, visited])
 
     return (
         <View>
             <TouchableOpacity onPress={() => {
-                getMe("5").then((data) => {
-                    console.log(data);
-                })
+               SecureStore.setItemAsync("token", "null");
             }}>
             <Text>{isLoading ? "Loading" : "Home"}</Text>
             </TouchableOpacity>

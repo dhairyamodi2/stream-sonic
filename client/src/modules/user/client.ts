@@ -32,9 +32,7 @@ export const getMe = async (token : string) => {
 
 export const completeProfile = async (birthDate : Date, token : string) => {
     try {
-        const {data} = await http.put<ResponseType<User>>('/user/completeprofile', JSON.stringify({
-            birthDate : birthDate
-        }), {headers: {
+        const {data} = await http.put<ResponseType<User>>('/user/completeprofile', {birthDate: birthDate}, {headers: {
             'authorization' : `Bearer ${token}`
         }})
         if(data && data.success) {
@@ -48,6 +46,7 @@ export const completeProfile = async (birthDate : Date, token : string) => {
             message: data.message ? data.message : "Something went wrong"
         }
     } catch (error) {
+        console.log(error);
         return HandleError(error);
     }
 }

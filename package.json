@@ -5,7 +5,8 @@
         "web",
         "mobile",
         "client",
-        "api"
+        "api",
+        "common"
     ],
     "scripts": {
         "start" : "yarn workspace api start"
@@ -15,6 +16,8 @@
     "license": "MIT",
     "dependencies": {
         "api" : "*",
-        "client" : "*"
+        "client" : "*",
+        "common" : "*"
+
     }
 }

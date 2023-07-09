@@ -42,7 +42,7 @@ export const completeProfile = async function (req : Request, res : Response) {
                 completedProfile: true
             }
         })
-        respond<User>(200, true, user, res);
+        respond<User>(200, true, user, res, "Birth Data added");
     } catch (error) {
         console.log(error);
         HandlePrismaExceptions(error, res);

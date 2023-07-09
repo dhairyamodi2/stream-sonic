@@ -1,0 +1,16 @@
+version: '3.1'
+
+
+services:
+  postgres:
+    image: postgres
+    container_name: postgresInstance
+    restart: always
+    environment:
+        - POSTGRES_USER=dhairyamodi45
+        - POSTGRES_USER=dhairya
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - "6754:5432"
+
