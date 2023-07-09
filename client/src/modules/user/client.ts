@@ -7,18 +7,24 @@ import { HandleError } from "../../utils/HandleError";
 
 export const getMe = async (token : string) => {
     try {
-        const {data} = await http.get<ResponseType<User>>('/user/me');
+        const {data} = await http.get<ResponseType<User>>('/user/me', {
+            headers: {
+                'authorization' : `Bearer ${token}`
+            }
+        });
         if(data && data.success) {
             return {
                 user : data.data,
                 message: data.message
             }
         }
+        console.log(data)
         return {
             user : null,
             message: data.message ? data.message : "Something went wrong"
         }
     } catch (error) {
+        console.log(error);
         return HandleError(error);
     }
 }

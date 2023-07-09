@@ -19,6 +19,7 @@ export const authenticate = async (req : Request, res : Response, next : NextFun
         }
 
         let token = slices[1];
+        console.log(token);
         const decodedPayload = verify(token, 'RANDOMKEY') as JwtPayload;
         
         if(!decodedPayload || !decodedPayload.email || ! decodedPayload.user_id) {

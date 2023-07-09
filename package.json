@@ -14,6 +14,7 @@
     "main": "index.js",
     "license": "MIT",
     "dependencies": {
-        "api" : "*"
+        "api" : "*",
+        "client" : "*"
     }
 }
