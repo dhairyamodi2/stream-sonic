@@ -8,8 +8,11 @@ import { AntDesign } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
 import { GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } from "../../envConstants";
 import * as Linking from "expo-linking";
+import * as SecureStore from 'expo-secure-store';
+import { useDispatch } from "react-redux";
+import {setVisited} from 'common/src/modules/auth/auth.actions'
 
-type Props = NativeStackNavigationProp<RootStackParamsList, 'Login'>;
+type Props = NativeStackNavigationProp<RootStackParamsList>
 export const LoginView = function () {
     const navigation = useNavigation<Props>();
     const clientId = GOOGLE_CLIENT_ID
@@ -27,17 +30,24 @@ export const LoginView = function () {
 
         setResult(result);
         console.log('got the result')
-    //     if (result.type === 'success') {
-    //         const params = Linking.parse(result.url);
-    //         console.log(params.queryParams);
-    //     }
     }
 
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if(result && result.type === 'success') {
             const params = Linking.parse(result.url);
-            console.log(params);
+            if(params.queryParams && params.queryParams.token) {
+                console.log(params.queryParams.token)
+                SecureStore.setItemAsync("token", params.queryParams.token as string).then((data)=> {
+                    dispatch(setVisited() as any);
+                    console.log('set visited to false')
+                    navigation.navigate('Home');
+                }).catch((err) => {
+                    ToastAndroid.show(err, 1000);
+                })
+                // navigation.navigate('Home')
+            }
         }
         console.log('result changed');
         console.log(result)

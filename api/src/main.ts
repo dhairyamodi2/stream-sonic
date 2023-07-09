@@ -1,26 +1,7 @@
-import { log } from 'console';
-import express from 'express';
-import dotenv from 'dotenv'
-import path from 'path';
-import cors from 'cors';
+import { log } from "console";
+import app from "./app";
 
-const app = express();
-app.use(cors({origin: '*'}))
 
-app.use(express.json());
-
-dotenv.config({
-    path: path.join(__dirname, '../.env')
-})
-
-import AuthRouter from './routes'
-app.use("/auth", AuthRouter);
-
-app.get("/", (req, res) => {
-    res.json({
-        success: true
-    })
-})
 app.listen(process.env.PORT, () => {
     log(`Server running on ${process.env.PORT}`);
 })

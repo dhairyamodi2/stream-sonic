@@ -5,12 +5,19 @@
         "web",
         "mobile",
         "client",
-        "api"
+        "api",
+        "common"
     ],
     "scripts": {
         "start" : "yarn workspace api start"
     },
     "version": "1.0.0",
     "main": "index.js",
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "api" : "*",
+        "client" : "*",
+        "common" : "*"
+
+    }
 }
