@@ -23,7 +23,7 @@ export const Onboarding = function () {
     useEffect(() => {
         if (isLoading === false) {
             if(user && user?.completedProfile === true) {
-                navigation.replace('Home');
+                navigation.replace('Root');
             }
             else {
                 ToastAndroid.show(message, 1000);

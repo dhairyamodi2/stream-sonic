@@ -3,7 +3,6 @@ import React, { useDeferredValue, useEffect, useState } from "react"
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamsList } from "../../Navigation";
 import { useNavigation } from "@react-navigation/native";
-import { MainText } from "../../ui/Text";
 import { AntDesign } from '@expo/vector-icons'; 
 import * as WebBrowser from 'expo-web-browser';
 import { GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } from "../../envConstants";
@@ -42,7 +41,7 @@ export const LoginView = function () {
                 SecureStore.setItemAsync("token", params.queryParams.token as string).then((data)=> {
                     dispatch(setVisited() as any);
                     console.log('set visited to false')
-                    navigation.navigate('Home');
+                    navigation.navigate('Root');
                 }).catch((err) => {
                     ToastAndroid.show(err, 1000);
                 })
