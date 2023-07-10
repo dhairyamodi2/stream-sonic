@@ -41,7 +41,7 @@ export default function App() {
           </PaperProvider>
           </Provider>
         </NavigationContainer>
-      </SafeAreaView>
+     </SafeAreaView>
     
   );
 }

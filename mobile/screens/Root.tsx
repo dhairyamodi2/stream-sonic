@@ -84,7 +84,7 @@ const Root = function () {
             backgroundColor: "black",
             borderTopWidth: 0.5,
             borderTopColor: "#414141",
-            padding : 5,
+            padding: 5,
             height: 60,
             shadowColor: "white",
             shadowOffset: { width: -2, height: 5 },
@@ -94,17 +94,60 @@ const Root = function () {
           tabBarIconStyle: {
             color: color_scheme,
             height: 5,
-            margin: 5
-          }
+            margin: 5,
+          },
         }}
       >
-        <Tab.Screen name="Home" component={Home} options={{tabBarIcon: ({color}) => <AntDesign name="home" size={24}  color={color}/>}}/>
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="home" size={24} color={color} />
+            ),
+          }}
+        />
 
-        <Tab.Screen name="Review" component={LoginView} options={{tabBarIcon: ({color}) => <AntDesign name="search1" size={24} color={color} />}}/>
+        <Tab.Screen
+          name="Review"
+          component={LoginView}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="search1" size={24} color={color} />
+            ),
+          }}
+        />
 
-        <Tab.Screen name="Native" component={LoginView} options={{tabBarIcon: ({color}) => <AntDesign name="book" size={24} color={color} />}}/>
+        <Tab.Screen
+          name="Native"
+          component={LoginView}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="book" size={24} color={color} />
+            ),
+          }}
+        />
 
-        <Tab.Screen name="Headache" component={LoginView} options={{tabBarIcon: ({color}) => <AntDesign name="pay-circle-o1" size={24} color={color} />}}/>
+        <Tab.Screen
+          name="Headache"
+          component={LoginView}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="pay-circle-o1" size={24} color={color} />
+            ),
+          }}
+        />
+
+        <Tab.Screen
+          name="artists"
+          component={LoginView}
+          options={
+            {
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="pay-circle-o1" size={24} color={color} />
+            ), tabBarItemStyle: {display: 'none'}}
+          }
+        />
       </Tab.Navigator>
     </View>
   );
