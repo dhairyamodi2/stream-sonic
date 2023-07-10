@@ -25,6 +25,7 @@ import Home from "./Home";
 import Artists from "./Artists";
 import Heading from "../ui/Heading";
 import { Header } from "react-native/Libraries/NewAppScreen";
+import Search from "./Search";
 
 const Tab = createBottomTabNavigator();
 const Root = function () {
@@ -122,8 +123,8 @@ const Root = function () {
         />
 
         <Tab.Screen
-          name="Review"
-          component={LoginView}
+          name="Search"
+          component={Search}
           options={{
             tabBarIcon: ({ color }) => (
               <AntDesign name="search1" size={24} color={color} />
