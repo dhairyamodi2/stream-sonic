@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { gradient_scheme } from '../constants'
 import CustomTextInput from '../ui/TextInput'
 import { AntDesign } from '@expo/vector-icons'
+import GenreList from '../modules/genre/GenreList'
 
 const Search = () => {
 
@@ -22,8 +23,11 @@ const Search = () => {
             </Text>
 
             {/* <View> */}
+            <View style={{flex: 0.1}}>
                 <CustomTextInput search_field={search_field} setSearchField={setSearchField} />
-                
+            </View>
+
+                <GenreList />
             {/* </View> */}
         </LinearGradient>
     )
