@@ -13,6 +13,7 @@ import { Onboarding } from './screens/Onboarding';
 import { Provider } from 'react-redux';
 import { store } from 'common/src/store';
 import Root from './screens/Root';
+import RootChild from './screens/Root';
 
 const theme = {
   ...DefaultTheme,
@@ -33,7 +34,7 @@ export default function App() {
           <PaperProvider theme={theme}>
           <RootStack.Navigator screenOptions={{ headerShown: false }}>
           
-            <RootStack.Screen name='Root' component={Root}></RootStack.Screen>
+            <RootStack.Screen name='Root' component={RootChild}></RootStack.Screen>
             <RootStack.Screen name='Login' component={LoginView}></RootStack.Screen>
             <RootStack.Screen name='Onboarding' component={Onboarding}></RootStack.Screen>
           </RootStack.Navigator>

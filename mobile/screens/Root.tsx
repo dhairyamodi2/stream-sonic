@@ -20,8 +20,11 @@ import { color_scheme, gradient_scheme } from "../constants";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Onboarding } from "./Onboarding";
 import { LoginView } from "../modules/Auth/LoginView";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Entypo } from "@expo/vector-icons";
 import Home from "./Home";
+import Artists from "./Artists";
+import Heading from "../ui/Heading";
+import { Header } from "react-native/Libraries/NewAppScreen";
 
 const Tab = createBottomTabNavigator();
 const Root = function () {
@@ -78,7 +81,6 @@ const Root = function () {
 
       <Tab.Navigator
         screenOptions={{
-          headerShown: false,
           tabBarActiveTintColor: color_scheme,
           tabBarStyle: {
             backgroundColor: "black",
@@ -96,6 +98,16 @@ const Root = function () {
             height: 5,
             margin: 5,
           },
+          headerStyle: {
+            backgroundColor: "black"
+          },
+          headerTintColor: "white",
+          headerTitleAlign: 'center'
+          // headerLeft: () => {
+          //   return (
+          //     <Entypo name="chevron-left" color={"white"} size={30}></Entypo>
+          //   );
+          // },
         }}
       >
         <Tab.Screen
@@ -105,6 +117,7 @@ const Root = function () {
             tabBarIcon: ({ color }) => (
               <AntDesign name="home" size={24} color={color} />
             ),
+            headerShown: false,
           }}
         />
 
@@ -115,6 +128,7 @@ const Root = function () {
             tabBarIcon: ({ color }) => (
               <AntDesign name="search1" size={24} color={color} />
             ),
+            headerShown: false,
           }}
         />
 
@@ -125,6 +139,7 @@ const Root = function () {
             tabBarIcon: ({ color }) => (
               <AntDesign name="book" size={24} color={color} />
             ),
+            headerShown: false
           }}
         />
 
@@ -135,18 +150,20 @@ const Root = function () {
             tabBarIcon: ({ color }) => (
               <AntDesign name="pay-circle-o1" size={24} color={color} />
             ),
+            headerShown: false
           }}
         />
 
         <Tab.Screen
           name="artists"
-          component={LoginView}
-          options={
-            {
+          component={Artists}
+          options={{
             tabBarIcon: ({ color }) => (
               <AntDesign name="pay-circle-o1" size={24} color={color} />
-            ), tabBarItemStyle: {display: 'none'}}
-          }
+            ),
+            tabBarItemStyle: { display: "none" },
+            
+          }}
         />
       </Tab.Navigator>
     </View>
