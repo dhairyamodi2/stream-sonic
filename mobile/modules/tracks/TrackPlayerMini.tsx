@@ -1,26 +1,64 @@
 import { View, Text, Image, Pressable } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AntDesign, Entypo, FontAwesome5 } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { gradient_scheme } from "../../constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {Audio} from 'expo-av'
-const TrackPlayerMini = () => {
-    useEffect(() => {
-        AsyncStorage.getItem("track").then((item) => {
-            console.log(JSON.parse(item!));
-        });
-        // console.log(JSON.parse(item))
-    }, []);
+import { useDispatch, useSelector } from "react-redux";
+import { State } from "common/src/store";
+import { PlayState } from "common/src/modules/tracks/tracks.types";
+import { START_PLAYING, STOP_PLAYING } from "common/src/constants";
+import { useFocusEffect } from "@react-navigation/native";
 
+const TrackPlayerMini = () => {
+    const {track, shouldPlay, playing} = useSelector<State, PlayState>(state => state.playback)
+    const dispatch = useDispatch();
+    const [sound, setSound] = useState<Audio.SoundObject>()
+    useEffect(() => {
+        async function fn() {
+            if (track && !playing) {
+                try {
+                    console.log('rendered play');
+                    dispatch({type: START_PLAYING});
+                    const sound = await Audio.Sound.createAsync({uri: `https://streamsonic.loca.lt/tracks/play/${track.track_id}`}, {shouldPlay})
+                    setSound(sound);
+                    console.log('played');
+                    
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        }
+        fn()
+    }, [track])
+    useEffect(() => {
+        console.log('min track rendered');
+    }, [])
     const handlePlay = async () => {
         try {
-            await Audio.Sound.createAsync({uri: `https://streamsonic.loca.lt/tracks/play/8f965c81-3e94-4363-a4b5-41d7c8704e92`}, {shouldPlay: true})
+            if (!sound) {
+                const sound = await Audio.Sound.createAsync({uri: `https://streamsonic.loca.lt/tracks/play/${track.track_id}`}, {shouldPlay})
+                sound.sound.playAsync();
+                return;
+            } 
+
+            if (playing) {
+                dispatch({type : STOP_PLAYING})
+                sound.sound.pauseAsync();
+            }
+            else {
+                dispatch({type: START_PLAYING})
+                sound.sound.playAsync();
+            }
         } catch (error) {
-            console.log(error);
+            
         }
         
     };
+    if (!track) {
+        return <View ></View>
+    }
     return (
         <LinearGradient
             colors={gradient_scheme}
@@ -71,7 +109,7 @@ const TrackPlayerMini = () => {
             >
                 <FontAwesome5 name="heart" size={24} color="white" />
                 <Pressable onPress={handlePlay}>
-                    <Entypo name="controller-play" size={24} color="white" />
+                    <Entypo name={playing ? 'controller-paus' : 'controller-play'} size={24} color="white" />
                 </Pressable>
             </View>
         </LinearGradient>

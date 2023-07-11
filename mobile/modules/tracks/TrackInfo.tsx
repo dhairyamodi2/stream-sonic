@@ -2,9 +2,18 @@ import { View, Text, Image, Pressable } from 'react-native'
 import React from 'react'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { TracksWithArtists } from 'api/src/types/Prisma'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useDispatch } from 'react-redux'
+import { playTracks } from 'common/src/modules/tracks/tracks.actions'
 
 const TrackInfo : React.FC<{track : TracksWithArtists}> = ({track}) => {
+    const dispatch = useDispatch();
+    const handlePress = async function () {
+        await AsyncStorage.setItem("track", JSON.stringify(track));
+        dispatch(playTracks(track, true) as any);
+    }
     return (
+        <Pressable onPress={handlePress}>
         <View
             style={{
                 flexDirection: "row",
@@ -48,6 +57,7 @@ const TrackInfo : React.FC<{track : TracksWithArtists}> = ({track}) => {
                 <FontAwesome5 name="heart" size={24} color="white" />
         
         </View>
+        </Pressable>
     )
 }
 

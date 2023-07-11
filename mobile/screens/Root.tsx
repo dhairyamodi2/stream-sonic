@@ -27,6 +27,7 @@ import Heading from "../ui/Heading";
 import { Header } from "react-native/Libraries/NewAppScreen";
 import Search from "./Search";
 import Tracks from "./Tracks";
+import TrackPlayerMini from "../modules/tracks/TrackPlayerMini";
 
 const Tab = createBottomTabNavigator();
 const Root = function () {

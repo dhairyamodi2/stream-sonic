@@ -6,9 +6,10 @@ import CustomTextInput from '../ui/TextInput'
 import { AntDesign } from '@expo/vector-icons'
 import GenreList from '../modules/genre/GenreList'
 import TrackPlayerMini from '../modules/tracks/TrackPlayerMini'
+import { useIsFocused } from '@react-navigation/native'
 
 const Search = () => {
-
+    const focus = useIsFocused();
     const [search_field, setSearchField] = useState('');
     return (
         <LinearGradient colors={gradient_scheme} style={{ flex: 1, padding: 10 }}>
@@ -32,9 +33,9 @@ const Search = () => {
             </View>
                 
             {/* </View> */}
-            <View style={{flex: 0.1}}>
+            {focus && <View style={{flex: 0.1}}>
             <TrackPlayerMini />
-            </View>
+            </View>}
         </LinearGradient>
     )
 }

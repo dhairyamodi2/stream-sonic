@@ -1,13 +1,14 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { authReducers } from "./modules/auth/auth.reducers";
-import { getTracksReducer } from "./modules/tracks/track.reducers";
+import { getTracksReducer, playTrackReducer } from "./modules/tracks/track.reducers";
 
 
 
 const reducers = combineReducers({
     auth : authReducers,
-    tracks : getTracksReducer
+    tracks : getTracksReducer,
+    playback : playTrackReducer
 })
 
 const middleware = [thunk];

@@ -1,4 +1,4 @@
-import { TracksWithArtists } from "api/src/types/Prisma";
+import { TrackWithAlbum, TracksWithArtists } from "api/src/types/Prisma";
 
 export interface TrackState {
     isLoading : boolean;
@@ -12,5 +12,22 @@ export interface TrackActions {
     payload : {
         message : string;
         tracks : Array<TracksWithArtists>
+    }
+}
+
+
+export interface PlayState {
+    visited : boolean;
+    isLoading : boolean;
+    track? : TracksWithArtists
+    shouldPlay : boolean;
+    playing : boolean;
+}
+
+export interface PlayAction {
+    type : string;
+    payload : {
+        track : TracksWithArtists;
+        shouldPlay : boolean;
     }
 }

@@ -16,3 +16,12 @@ export const GET_TRACKS__REQ = 'GET_TRACKS__REQ';
 export const GET_TRACKS__SUC = 'GET_TRACKS__SUC';
 export const GET_TRACKS__FAIL = 'GET_TRACKS__FAIL';
 
+
+
+export const PLAY_TRACKS_REQ = 'PLAY_TRACKS_REQ';
+
+export const PLAY_TRACKS_SUC =  'PLAY_TRACKS_SUC';
+export const PLAY_TRACKS_FAIL =  'PLAY_TRACKS_FAIL';
+
+export const START_PLAYING = 'START_PLAYING'
+export const STOP_PLAYING = 'STOP_PLAYING'
