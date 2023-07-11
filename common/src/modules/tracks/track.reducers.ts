@@ -49,7 +49,8 @@ export const playTrackReducer =  (
         case START_PLAYING:
             return {
                 ...state,
-                playing: true
+                playing: true,
+                shouldPlay: false
             }
         case STOP_PLAYING:
             return {
