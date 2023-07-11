@@ -18,6 +18,7 @@ model User {
   email String @unique
   name String
   birth_date DateTime?
+  imageUri String? @default("https://cdn-icons-png.flaticon.com/512/6596/6596121.png")
   completedProfile Boolean @default(false)
   user_type String @default("user")
   created_at DateTime @default(now()) @db.Timestamptz()
@@ -26,7 +27,8 @@ model User {
   savedAlbums Album[] @relation(name: "savedby")
   tracks Track[] @relation(name: "tracks")
   likes Track[]  @relation(name: "likes")
-  playlists PLaylists[] 
+  playlists PLaylists[]
+  
 
 }
 
@@ -34,6 +36,8 @@ model User {
 model Track {
   track_id  String @id @default(uuid()) 
   track_name String 
+  views Int? @default(0)
+  track_image String
   artists User[] @relation(name: "tracks")
   created_at DateTime @db.Timestamptz() @default(now())
   updated_at DateTime @updatedAt @db.Timestamptz()
@@ -47,6 +51,8 @@ model Track {
 model Album {
   album_id String @id @default(uuid())
   album_name String
+  album_image String
+  views Int? @default(0)
   tracks Track[] 
   savedBy User[] @relation("savedby")
   user User @relation(fields: [userId], references: [user_id])

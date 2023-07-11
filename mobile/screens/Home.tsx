@@ -1,67 +1,40 @@
-import React, { useEffect } from "react"
-import { Text, ToastAndroid, TouchableOpacity, View } from "react-native"
-import * as SecureStore from 'expo-secure-store'
-import { NativeStackNavigationProp } from "@react-navigation/native-stack"
-import { RootStackParamsList } from "../Navigation"
-import { useNavigation } from "@react-navigation/native"
-import { Props } from "../types/types"
-import { useDispatch, useSelector } from "react-redux"
-import { AuthState } from "common/src/modules/auth/auth.types"
-import { State } from "common/src/store"
-import { me } from "common/src/modules/auth/auth.actions"
+import { ScrollView, Text, View } from "react-native"
+import React from "react"
+import { gradient_scheme } from "../constants";
+import { LinearGradient } from 'expo-linear-gradient'
+import Header from "../ui/Header";
+import ArtistAvatar from "../modules/artists/ArtistAvatar";
+import Artists from "../modules/artists/Artists";
+import Albums from "../modules/albums/Albums";
+import Tracks from "../modules/tracks/Tracks";
+import TrackPlayerMini from "../modules/tracks/TrackPlayerMini";
+import { useSelector } from "react-redux";
+import { PlayState } from "common/src/modules/tracks/tracks.types";
+import { State } from "common/src/store";
+import { useIsFocused } from "@react-navigation/native";
 
-
-export const Home = function () {
-
-    const navigator = useNavigation<Props>()
-    const {visited, isAuthenticated, isLoading, message, user} = useSelector<State, AuthState>(state => state.auth)
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        console.log('from home')
-        console.log(visited);
-    }, [])
-    useEffect(() => {
-        if (visited === false) {
-            console.log('dispatched');
-            SecureStore.getItemAsync("token").then((item) => {
-                if(!item) {
-                    console.log('item')
-                    console.log(item);
-                    navigator.navigate('Login');
-                    return;
-                }
-                dispatch(me(item) as any)
-            })
-        }
-    }, [visited])
-   
-    useEffect(() => {
-        if (visited === true && isAuthenticated === false && isLoading === false) {
-           navigator.replace('Login');
-        }
-
-        if (isAuthenticated === true) {
-            if (!user){
-                navigator.replace('Login');
-                return;
-            }
-            console.log(user.completedProfile);
-            if (user.completedProfile === false && visited === true) {
-                navigator.replace('Onboarding');
-            }
-        }
-    }, [isAuthenticated, isLoading, visited])
-
+const Home = function () {
+    const {track} = useSelector<State, PlayState>(state => state.playback)
+    const focus = useIsFocused();
     return (
-        <View>
-            <TouchableOpacity onPress={() => {
-               SecureStore.setItemAsync("token", "null");
-            }}>
-            <Text>{isLoading ? "Loading" : "Home"}</Text>
-            </TouchableOpacity>
-            
-        </View>
+        <LinearGradient colors={gradient_scheme} style={{ flex: 1, padding: 10 }}>
+            <Header />
+            <View style={{ flex: track ? 0.8 : 0.9 }}>
+                <ScrollView style={{ paddingLeft: 10, paddingTop: 10, paddingBottom: 50 }}>
+                    <Artists></Artists>
+                    <Albums></Albums>
+                    <Tracks></Tracks>
+
+                    <View style={{ marginBottom: 100 }}></View>
+                </ScrollView>
+
+            </View>
+            {focus && <View style={{ flex: track ? 0.1 : 0 }}>
+                <TrackPlayerMini />
+            </View>}
+
+        </LinearGradient>
     )
 }
+
+export default Home;

@@ -3,9 +3,7 @@ import { Response } from "express";
 import { respond } from "../utils";
 
 export function InternalServerError(res : Response){
-    res.status(500).json({
-        error: "Internal server error"
-    })
+    respond<any>(500, false, null, res, 'Internal Server Error')
 }
 
 
