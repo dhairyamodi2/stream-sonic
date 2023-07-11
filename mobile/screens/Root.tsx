@@ -28,6 +28,7 @@ import { Header } from "react-native/Libraries/NewAppScreen";
 import Search from "./Search";
 import Tracks from "./Tracks";
 import TrackPlayerMini from "../modules/tracks/TrackPlayerMini";
+import { SoundProvider } from "../providers/SoundContext";
 
 const Tab = createBottomTabNavigator();
 const Root = function () {
@@ -81,7 +82,7 @@ const Root = function () {
 
       {/* </LinearGradient> */}
       {/* <TabNavigator /> */}
-
+      <SoundProvider>
       <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: color_scheme,
@@ -180,6 +181,7 @@ const Root = function () {
           }}
         />
       </Tab.Navigator>
+      </SoundProvider>
     </View>
   );
 };

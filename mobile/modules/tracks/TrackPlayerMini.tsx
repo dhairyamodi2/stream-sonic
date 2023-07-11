@@ -1,5 +1,5 @@
 import { View, Text, Image, Pressable } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AntDesign, Entypo, FontAwesome5 } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { gradient_scheme } from "../../constants";
@@ -10,19 +10,30 @@ import { State } from "common/src/store";
 import { PlayState } from "common/src/modules/tracks/tracks.types";
 import { START_PLAYING, STOP_PLAYING } from "common/src/constants";
 import { useFocusEffect } from "@react-navigation/native";
+import { Sound, SoundContext } from "../../providers/SoundContext";
 
 const TrackPlayerMini = () => {
     const {track, shouldPlay, playing} = useSelector<State, PlayState>(state => state.playback)
     const dispatch = useDispatch();
-    const [sound, setSound] = useState<Audio.SoundObject>()
+    const {setSound, sound} = useContext(Sound) as SoundContext;
     useEffect(() => {
         async function fn() {
-            if (track && !playing) {
+            if (track && shouldPlay) {
                 try {
                     console.log('rendered play');
                     dispatch({type: START_PLAYING});
-                    const sound = await Audio.Sound.createAsync({uri: `https://streamsonic.loca.lt/tracks/play/${track.track_id}`}, {shouldPlay})
-                    setSound(sound);
+                    if (sound) {
+                        sound.sound.unloadAsync();
+                        dispatch({type: STOP_PLAYING})
+                        const s = await Audio.Sound.createAsync({uri: `https://streamsonic.loca.lt/tracks/play/${track.track_id}`}, {shouldPlay})
+                        dispatch({type: START_PLAYING})
+                        setSound(s);
+                        return;
+                    } 
+                    else {
+                        const s = await Audio.Sound.createAsync({uri: `https://streamsonic.loca.lt/tracks/play/${track.track_id}`}, {shouldPlay})
+                        setSound(s);
+                    }
                     console.log('played');
                     
                 } catch (error) {
@@ -38,8 +49,8 @@ const TrackPlayerMini = () => {
     const handlePlay = async () => {
         try {
             if (!sound) {
-                const sound = await Audio.Sound.createAsync({uri: `https://streamsonic.loca.lt/tracks/play/${track.track_id}`}, {shouldPlay})
-                sound.sound.playAsync();
+                const s = await Audio.Sound.createAsync({uri: `https://streamsonic.loca.lt/tracks/play/${track.track_id}`}, {shouldPlay})
+                s.sound.playAsync();
                 return;
             } 
 
@@ -52,7 +63,7 @@ const TrackPlayerMini = () => {
                 sound.sound.playAsync();
             }
         } catch (error) {
-            
+            console.log(error)
         }
         
     };
@@ -61,7 +72,7 @@ const TrackPlayerMini = () => {
     }
     return (
         <LinearGradient
-            colors={gradient_scheme}
+            colors={ ["#262424", "#565656"]}
             style={{
                 flexDirection: "row",
                 flex: 1,
@@ -75,7 +86,7 @@ const TrackPlayerMini = () => {
                     overflow: "hidden",
                     alignItems: "center",
                     justifyContent: "flex-start",
-                    marginLeft: 5,
+                    marginLeft: 9,
                 }}
             >
                 <Image

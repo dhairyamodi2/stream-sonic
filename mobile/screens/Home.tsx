@@ -14,12 +14,12 @@ import { State } from "common/src/store";
 import { useIsFocused } from "@react-navigation/native";
 
 const Home = function () {
-    // const {track} = useSelector<State, PlayState>(state => state.playback)
+    const {track} = useSelector<State, PlayState>(state => state.playback)
     const focus = useIsFocused();
     return (
         <LinearGradient colors={gradient_scheme} style={{ flex: 1, padding: 10 }}>
             <Header />
-            <View style={{ flex: 0.8 }}>
+            <View style={{ flex: track ? 0.8 : 0.9 }}>
                 <ScrollView style={{ paddingLeft: 10, paddingTop: 10, paddingBottom: 50 }}>
                     <Artists></Artists>
                     <Albums></Albums>
@@ -29,7 +29,7 @@ const Home = function () {
                 </ScrollView>
 
             </View>
-            {focus && <View style={{ flex: 0.1 }}>
+            {focus && <View style={{ flex: track ? 0.1 : 0 }}>
                 <TrackPlayerMini />
             </View>}
 
