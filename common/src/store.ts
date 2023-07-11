@@ -5,7 +5,7 @@ import { authReducers } from "./modules/auth/auth.reducers";
 
 
 const reducers = combineReducers({
-    auth : authReducers
+    auth : authReducers,
 })
 
 const middleware = [thunk];

@@ -7,24 +7,25 @@ import ArtistAvatar from "../modules/artists/ArtistAvatar";
 import Artists from "../modules/artists/Artists";
 import Albums from "../modules/albums/Albums";
 import Tracks from "../modules/tracks/Tracks";
+import TrackPlayerMini from "../modules/tracks/TrackPlayerMini";
 
 const Home = function () {
     return (
         <LinearGradient colors={gradient_scheme} style={{flex: 1, padding: 10}}>
             <Header />
 
-            <ScrollView style={{flex: 0.9, paddingLeft: 10, paddingTop: 10, paddingBottom: 50}}>
+            <View style={{flex: 0.8}}>
+            <ScrollView style={{paddingLeft: 10, paddingTop: 10, paddingBottom: 50}}>
                <Artists></Artists>
                <Albums></Albums>
                <Tracks></Tracks>
 
-               <View style={{marginTop: 100}}></View>
+               <View style={{marginBottom: 100}}></View>
             </ScrollView>
-           
-
-            <Text style={{color: 'tomato', backgroundColor: 'blue'}}>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis aut hic nemo illo quisquam sit exercitatinsk
-            </Text>
+            </View>
+            <View style={{flex: 0.1}}>
+            <TrackPlayerMini />
+            </View>
         </LinearGradient>
     )
 }

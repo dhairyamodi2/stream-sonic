@@ -5,6 +5,7 @@ import { gradient_scheme } from '../constants'
 import CustomTextInput from '../ui/TextInput'
 import { AntDesign } from '@expo/vector-icons'
 import GenreList from '../modules/genre/GenreList'
+import TrackPlayerMini from '../modules/tracks/TrackPlayerMini'
 
 const Search = () => {
 
@@ -26,9 +27,14 @@ const Search = () => {
             <View style={{flex: 0.1}}>
                 <CustomTextInput search_field={search_field} setSearchField={setSearchField} />
             </View>
-
-                <GenreList />
+            <View style={{flex: 0.7}}>
+            <GenreList />
+            </View>
+                
             {/* </View> */}
+            <View style={{flex: 0.1}}>
+            <TrackPlayerMini />
+            </View>
         </LinearGradient>
     )
 }
