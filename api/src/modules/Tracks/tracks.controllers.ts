@@ -20,8 +20,8 @@ export const AddTracks = async (req: Request, res: Response) => {
             HandleUnauthorized(res);
             return;
         }
-        if (!req.body.track_name) {
-            HandleBadRequest(res, "Track name required");
+        if (!req.body.track_name || !req.body.track_image) {
+            HandleBadRequest(res, "Track name and Track image required");
             return;
         }
 
@@ -40,6 +40,7 @@ export const AddTracks = async (req: Request, res: Response) => {
             data: {
                 track_name: req.body.track_name as string,
                 track_id: id[0],
+                track_image: req.body.track_image as string,
                 artists: {
                     connect: [{ user_id: req.user.user_id }]
                 }

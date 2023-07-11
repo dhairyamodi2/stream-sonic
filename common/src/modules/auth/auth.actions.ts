@@ -13,10 +13,10 @@ export const me = function (token: string) {
             type: AUTH_REQ,
             payload: { user: null, message: "Loading" }
         })
-        const {message, user} = await getMe(token);
+        const {message, data} = await getMe(token);
 
 
-        if (!user) {
+        if (!data) {
             dispatch({
                 type: AUTH_FAIL,
                 payload: {user: null, message: message}
@@ -26,7 +26,7 @@ export const me = function (token: string) {
 
         dispatch({
             type: AUTH_SUC,
-            payload: {user, message}
+            payload: {user: data, message}
         })
     }
 }
@@ -47,8 +47,8 @@ export const onboarding = function ({birthDate, token} : {birthDate : Date, toke
             type : ONBOARDING_REQ,
             payload: {user : null, message : ''}
         })
-        const {message, user} = await completeProfile(birthDate, token);
-        if (!user || user.completedProfile === false) {
+        const {message, data} = await completeProfile(birthDate, token);
+        if (!data || data.completedProfile === false) {
             dispatch({
                 type: ONBOARDING_FAIL,
                 payload: {user : null, message}
@@ -57,7 +57,7 @@ export const onboarding = function ({birthDate, token} : {birthDate : Date, toke
         }
         dispatch({
             type: ONBOARDING_SUC,
-            payload: {user : user, message}
+            payload: {user : data, message}
         })
         
     }
