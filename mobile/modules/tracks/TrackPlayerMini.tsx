@@ -28,7 +28,6 @@ const TrackPlayerMini = () => {
                 flexDirection: "row",
                 flex: 1,
                 borderRadius: 5,
-                backgroundColor: "red",
             }}
         >
             <View

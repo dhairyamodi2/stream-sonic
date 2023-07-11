@@ -12,7 +12,7 @@ const Artists = function () {
     return (
         <View style={{marginTop: 15}}>
             {/* <View style={{flexDirection: 'row'}}> */}
-            <Heading text="Top Artists" icon={<Entypo name="chevron-small-right" size={24} color="black" />}/>
+            <Heading text="Top Artists" icon={<Entypo name="chevron-small-right" size={24} color="black" />} route="Artists"/>
         
             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <ArtistAvatar />

@@ -4,9 +4,10 @@ import { Entypo } from "@expo/vector-icons";
 import { color_scheme } from "../constants";
 import { useNavigation } from "@react-navigation/native";
 import { Icon } from "@expo/vector-icons/build/createIconSet";
+import { TabNavProps } from "../Navigation";
 
-const Heading: React.FC<{ text: string; icon?: any }> = ({ text, icon }) => {
-  const navigator = useNavigation();
+const Heading: React.FC<{ text: string; icon?: any, route : 'Artists' | 'Top Tracks'}> = ({ text, icon, route }) => {
+  const navigator = useNavigation<TabNavProps>();
   return (
     <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
       <Text
@@ -22,7 +23,7 @@ const Heading: React.FC<{ text: string; icon?: any }> = ({ text, icon }) => {
       {icon && (
         <Pressable
           onPress={() => {
-            navigator.navigate("artists");
+            navigator.navigate(route);
           }}
         >
           <View style={{ flexDirection: "row", alignItems: "center" }}>

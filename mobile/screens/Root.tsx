@@ -26,6 +26,7 @@ import Artists from "./Artists";
 import Heading from "../ui/Heading";
 import { Header } from "react-native/Libraries/NewAppScreen";
 import Search from "./Search";
+import Tracks from "./Tracks";
 
 const Tab = createBottomTabNavigator();
 const Root = function () {
@@ -156,8 +157,19 @@ const Root = function () {
         />
 
         <Tab.Screen
-          name="artists"
+          name="Artists"
           component={Artists}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="pay-circle-o1" size={24} color={color} />
+            ),
+            tabBarItemStyle: { display: "none" },
+            
+          }}
+        />
+        <Tab.Screen
+          name="Top Tracks"
+          component={Tracks}
           options={{
             tabBarIcon: ({ color }) => (
               <AntDesign name="pay-circle-o1" size={24} color={color} />
