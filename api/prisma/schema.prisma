@@ -26,7 +26,8 @@ model User {
   savedAlbums Album[] @relation(name: "savedby")
   tracks Track[] @relation(name: "tracks")
   likes Track[]  @relation(name: "likes")
-  playlists PLaylists[] 
+  playlists PLaylists[]
+  
 
 }
 
