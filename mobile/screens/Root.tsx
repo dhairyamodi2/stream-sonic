@@ -29,7 +29,8 @@ import Search from "./Search";
 import Tracks from "./Tracks";
 import TrackPlayerMini from "../modules/tracks/TrackPlayerMini";
 import { SoundProvider } from "../providers/SoundContext";
-
+import {getAlbums} from 'common/src/modules/albums/albums.actions';
+import {getArtists} from 'common/src/modules/artists/artists.actions';
 const Tab = createBottomTabNavigator();
 const Root = function () {
   const navigator = useNavigation<Props>();
@@ -74,7 +75,12 @@ const Root = function () {
   //         }
   //     }
   // }, [isAuthenticated, isLoading, visited])
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+     dispatch(getAlbums() as any);
+     dispatch(getArtists() as any)
+     
+  }, [])
   return (
     <View style={{ flex: 1 }}>
       {/* <LinearGradient colors={gradient_scheme} style={{ flex: 0.9,  justifyContent: 'center', alignItems: 'center' }}> */}

@@ -25,3 +25,12 @@ export const PLAY_TRACKS_FAIL =  'PLAY_TRACKS_FAIL';
 
 export const START_PLAYING = 'START_PLAYING'
 export const STOP_PLAYING = 'STOP_PLAYING'
+
+export const GET_ALBUMS__REQ = 'GET_ALBUMS__REQ';
+
+export const GET_ALBUMS__SUC = 'GET_ALBUMS__SUC';
+export const GET_ALBUMS__FAIL = 'GET_ALBUMS__FAIL';
+
+
+export const ARTISTS_LOADING = 'ARTISTS_LOADING';
+export const ARTISTS_SUC = 'ARTISTS_SUC';

@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Icon } from "@expo/vector-icons/build/createIconSet";
 import { TabNavProps } from "../Navigation";
 
-const Heading: React.FC<{ text: string; icon?: any, route : 'Artists' | 'Top Tracks'}> = ({ text, icon, route }) => {
+const Heading: React.FC<{ text: string; icon?: any, route? : 'Artists' | 'Top Tracks'}> = ({ text, icon, route }) => {
   const navigator = useNavigation<TabNavProps>();
   return (
     <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -20,7 +20,7 @@ const Heading: React.FC<{ text: string; icon?: any, route : 'Artists' | 'Top Tra
       >
         {text}
       </Text>
-      {icon && (
+      {icon && route && (
         <Pressable
           onPress={() => {
             navigator.navigate(route);

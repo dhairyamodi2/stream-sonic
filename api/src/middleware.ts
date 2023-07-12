@@ -21,7 +21,7 @@ export const authenticate = async (req : Request, res : Response, next : NextFun
         let token = slices[1];
         console.log(token);
         const decodedPayload = verify(token, 'RANDOMKEY') as JwtPayload;
-        
+        console.log(decodedPayload)
         if(!decodedPayload || !decodedPayload.user_id) {
             HandleUnauthorized(res);
             return;
