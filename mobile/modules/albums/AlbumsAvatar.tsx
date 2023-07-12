@@ -23,7 +23,7 @@ const AlbumsAvatar: React.FC<{ album: AlbumsWithUser }> = ({ album }) => {
             marginTop: 7,
           }}
         >
-          {album.album_name.length > 16 ? album.album_name.substring(0, 16) : album.album_name}
+          {album.album_name.length > 13 ? album.album_name.substring(0, 13) : album.album_name}
         </Text>
       </View>
     </Pressable>

@@ -7,17 +7,17 @@ import { State } from 'common/src/store'
 import { getTracks } from 'common/src/modules/tracks/tracks.actions'
 
 const TrackList = () => {
-   
-    const {tracks} = useSelector<State, TrackState>(state => state.tracks)
+
+  const { tracks } = useSelector<State, TrackState>(state => state.tracks)
   return (
-    <View style={ {flex: 1}}>
-       <ScrollView >
-        <View > 
-            {tracks && tracks.map((track) => {
-                return <TrackInfo track={track} key={track.track_id}/>
-            })}
+    <View style={{ flex: 1 }}>
+      <ScrollView >
+        <View >
+          {tracks && tracks.map((track) => {
+            return <TrackInfo track={track} key={track.track_id} />
+          })}
         </View>
-       </ScrollView>
+      </ScrollView>
     </View>
   )
 }

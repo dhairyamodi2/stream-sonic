@@ -31,6 +31,7 @@ import TrackPlayerMini from "../modules/tracks/TrackPlayerMini";
 import { SoundProvider } from "../providers/SoundContext";
 import {getAlbums} from 'common/src/modules/albums/albums.actions';
 import {getArtists} from 'common/src/modules/artists/artists.actions';
+import { getTracks } from "common/src/modules/tracks/tracks.actions";
 const Tab = createBottomTabNavigator();
 const Root = function () {
   const navigator = useNavigation<Props>();
@@ -79,7 +80,7 @@ const Root = function () {
   useEffect(() => {
      dispatch(getAlbums() as any);
      dispatch(getArtists() as any)
-     
+     dispatch(getTracks() as any);
   }, [])
   return (
     <View style={{ flex: 1 }}>

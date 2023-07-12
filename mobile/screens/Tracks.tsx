@@ -15,12 +15,6 @@ import TrackPlayerMini from '../modules/tracks/TrackPlayerMini'
 const Tracks = () => {
     const dispatch = useDispatch();
     const focussed = useIsFocused();
-    useEffect(() => {
-        if (focussed) {
-            dispatch(getTracks() as any)
-        }
-       
-    }, [focussed])
 
     const { isLoading, tracks } = useSelector<State, TrackState>(state => state.tracks)
     const { track } = useSelector<State, PlayState>(state => state.playback)
