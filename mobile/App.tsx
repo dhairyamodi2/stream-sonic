@@ -14,7 +14,9 @@ import { Provider } from 'react-redux';
 import { store } from 'common/src/store';
 import Root from './screens/Root';
 import RootChild from './screens/Root';
-
+import { useFonts, Ubuntu_400Regular, Ubuntu_500Medium} from '@expo-google-fonts/ubuntu';
+import { Nunito_400Regular } from '@expo-google-fonts/nunito';
+import { BalsamiqSans_400Regular, BalsamiqSans_700Bold } from '@expo-google-fonts/balsamiq-sans';
 const theme = {
   ...DefaultTheme,
   colors: {
@@ -25,6 +27,14 @@ const theme = {
 };
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    Ubuntu_400Regular, Ubuntu_500Medium, Nunito_400Regular, BalsamiqSans_400Regular, BalsamiqSans_700Bold
+
+  })
+
+  if (!fontsLoaded) {
+    return null
+  }
   return (
     
       <SafeAreaView style={{ flex: 1 }}>

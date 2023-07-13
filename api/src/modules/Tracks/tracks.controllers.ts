@@ -112,6 +112,7 @@ export const playTrack = async (req: Request<{ id?: string }>, res: Response) =>
         }
         const filePath = path.resolve(file_uri, `./${req.params.id}.mp3`);
         const stream = fs.createReadStream(filePath);
+        console.log('streaming now');
         stream.pipe(res)
     } catch (error) {
         console.log(error);

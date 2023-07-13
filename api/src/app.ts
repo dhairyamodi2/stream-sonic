@@ -16,12 +16,13 @@ import authRoutes from './modules/User/Auth/AuthRoutes';
 import userRoutes from './modules/User/user.routes';
 import trackRoutes from './modules/Tracks/tracks.routes';
 import albumsRouter from './modules/Albums/albums.routes';
-
+import artistRouter from './modules/Artists/artist.router';
 
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes)
 app.use("/tracks", trackRoutes);
 app.use("/albums", albumsRouter);
+app.use('/artists', artistRouter);
 app.get("/", (req, res) => {
     res.json({
         success: true

@@ -9,15 +9,7 @@ const AllArtists = () => {
     <View style={{flex: 1}}>
         <ScrollView>
       <View style={{flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-evenly'}}>
-        <ArtistAvatar />
-
-        <ArtistAvatar />
-        <ArtistAvatar />
-        <ArtistAvatar />
-        <ArtistAvatar />
-        <ArtistAvatar />
-        <ArtistAvatar />
-        <ArtistAvatar />
+         
       </View>
       </ScrollView>
     </View>

@@ -13,9 +13,9 @@ const Genre : React.FC<GenreProps> = ({name, backgroundColor, imageSrc}) => {
         <Text style={{
             alignSelf: 'flex-start',
             color: 'white',
-            fontWeight: 'bold',
             margin: 10,
-            fontSize: 22
+            fontSize: 18,
+            fontFamily: 'BalsamiqSans_400Regular'
         }}>{name}</Text>
 
         <View style={{position: 'relative', overflow:'hidden'}}>

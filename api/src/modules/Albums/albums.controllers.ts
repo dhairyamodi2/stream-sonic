@@ -6,15 +6,15 @@ import { respond } from "../../utils";
 import { Album, Track } from "@prisma/client";
 import { AlbumsWithTracksAndUser, AlbumsWithUser } from "../../types/Prisma";
 
-export const CreateAlbums = async (req : Request<any, any, {album_name? : string}>, res : Response) => {
+export const CreateAlbums = async (req : Request<any, any, {album_name? : string, album_image? : string}>, res : Response) => {
     try {
         if (!req.user) {
             HandleUnauthorized(res);
             return;
         }
 
-        const {album_name} = req.body;
-        if (!album_name) {
+        const {album_name, album_image} = req.body;
+        if (!album_name || !album_image) {
             HandleBadRequest(res, "Album name required");
             return;
         }
@@ -23,6 +23,7 @@ export const CreateAlbums = async (req : Request<any, any, {album_name? : string
             data: {
                 album_id: crypto.randomUUID(),
                 album_name: album_name,
+                album_image: album_image,
                 user: {
                     connect: {
                         user_id: req.user.user_id
@@ -71,7 +72,7 @@ export const AddTracks = async (req : Request<any,any,{album_id? : string, track
 }
 
 
-export const getAll = async (req : Request<any, any, any, {album_name? : string}>, res : Response) => {
+export const getAll = async (req : Request<any, any, any, {album_name? : string, user?: boolean}>, res : Response) => {
     try {
         const {album_name} = req.query;
         // let albums = await OrmClient.album.findMany({
@@ -88,7 +89,7 @@ export const getAll = async (req : Request<any, any, any, {album_name? : string}
                 }
             },
             include: {
-                user : true
+                user : req.query.user ? req.query.user : false
             }
         })
        

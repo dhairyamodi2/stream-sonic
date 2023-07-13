@@ -4,38 +4,40 @@ import { AntDesign, Entypo, FontAwesome5 } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { gradient_scheme } from "../../constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {Audio} from 'expo-av'
+import { Audio } from 'expo-av'
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "common/src/store";
 import { PlayState } from "common/src/modules/tracks/tracks.types";
 import { START_PLAYING, STOP_PLAYING } from "common/src/constants";
 import { useFocusEffect } from "@react-navigation/native";
 import { Sound, SoundContext } from "../../providers/SoundContext";
+import { backendUri } from "../../envConstants";
 
 const TrackPlayerMini = () => {
-    const {track, shouldPlay, playing} = useSelector<State, PlayState>(state => state.playback)
+    const { track, shouldPlay, playing } = useSelector<State, PlayState>(state => state.playback)
     const dispatch = useDispatch();
-    const {setSound, sound} = useContext(Sound) as SoundContext;
+    const { setSound, sound } = useContext(Sound) as SoundContext;
     useEffect(() => {
         async function fn() {
             if (track && shouldPlay) {
                 try {
                     console.log('rendered play');
-                    dispatch({type: START_PLAYING});
+                    dispatch({ type: START_PLAYING });
                     if (sound) {
+                        sound.sound.stopAsync();
                         sound.sound.unloadAsync();
-                        dispatch({type: STOP_PLAYING})
-                        const s = await Audio.Sound.createAsync({uri: `https://streamsonic.loca.lt/tracks/play/${track.track_id}`}, {shouldPlay})
-                        dispatch({type: START_PLAYING})
+                        dispatch({ type: STOP_PLAYING })
+                        const s = await Audio.Sound.createAsync({ uri: `${backendUri}/tracks/play/${track.track_id}` }, { shouldPlay })
+                        dispatch({ type: START_PLAYING })
                         setSound(s);
                         return;
-                    } 
+                    }
                     else {
-                        const s = await Audio.Sound.createAsync({uri: `https://streamsonic.loca.lt/tracks/play/${track.track_id}`}, {shouldPlay})
+                        const s = await Audio.Sound.createAsync({ uri: `${backendUri}/tracks/play/${track.track_id}` }, { shouldPlay })
                         setSound(s);
                     }
                     console.log('played');
-                    
+
                 } catch (error) {
                     console.log(error);
                 }
@@ -49,30 +51,30 @@ const TrackPlayerMini = () => {
     const handlePlay = async () => {
         try {
             if (!sound) {
-                const s = await Audio.Sound.createAsync({uri: `https://streamsonic.loca.lt/tracks/play/${track.track_id}`}, {shouldPlay})
+                const s = await Audio.Sound.createAsync({ uri: `${backendUri}/tracks/play/${track!.track_id}` }, { shouldPlay })
                 s.sound.playAsync();
                 return;
-            } 
+            }
 
             if (playing) {
-                dispatch({type : STOP_PLAYING})
+                dispatch({ type: STOP_PLAYING })
                 sound.sound.pauseAsync();
             }
             else {
-                dispatch({type: START_PLAYING})
+                dispatch({ type: START_PLAYING })
                 sound.sound.playAsync();
             }
         } catch (error) {
             console.log(error)
         }
-        
+
     };
     if (!track) {
         return <View ></View>
     }
     return (
         <LinearGradient
-            colors={ ["#262424", "#565656"]}
+            colors={["#262424", "#565656"]}
             style={{
                 flexDirection: "row",
                 flex: 1,
@@ -91,7 +93,7 @@ const TrackPlayerMini = () => {
             >
                 <Image
                     source={{
-                        uri: "https://i.scdn.co/image/ab67616d00001e02d2aaf635815c265aa1ecdecc",
+                        uri: track.track_image,
                     }}
                     style={{
                         width: 50,
@@ -101,11 +103,13 @@ const TrackPlayerMini = () => {
                 />
 
                 <View>
-                    <Text style={{ color: "white", fontWeight: "900", fontSize: 15 }}>
-                        On My Way
+                    <Text style={{ color: "white", fontFamily: 'BalsamiqSans_400Regular', fontSize: 15 }}>
+                        {track.track_name}
                     </Text>
                     <Text style={{ color: "white", fontSize: 10 }}>
-                        Alan Walker, Sabrina Carpenter
+                        {track.artists.map((artist) => {
+                            return artist.name
+                        }).join(",").substring(0, 13)}
                     </Text>
                 </View>
             </View>

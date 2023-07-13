@@ -15,12 +15,6 @@ import TrackPlayerMini from '../modules/tracks/TrackPlayerMini'
 const Tracks = () => {
     const dispatch = useDispatch();
     const focussed = useIsFocused();
-    useEffect(() => {
-        if (focussed) {
-            dispatch(getTracks() as any)
-        }
-       
-    }, [focussed])
 
     const { isLoading, tracks } = useSelector<State, TrackState>(state => state.tracks)
     const { track } = useSelector<State, PlayState>(state => state.playback)
@@ -28,12 +22,12 @@ const Tracks = () => {
         <LinearGradient colors={gradient_scheme} style={{
             flex: 1
         }}>
-            <View style={{flex: isLoading ? 10 : 0.9}}>
+            <View style={{flex: track ? 0.9: 1}}>
                 {tracks.length === 0 && isLoading ? <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <ActivityIndicator animating={true} color={'#FBC02D'} size={80} />
                 </View> : <TrackList />}
             </View>
-            {focussed && <View style={{ flex: 0.1 }}>
+            {focussed && <View style={{ flex: track ? 0.1 : 0 }}>
                 <TrackPlayerMini />
             </View>}
 
