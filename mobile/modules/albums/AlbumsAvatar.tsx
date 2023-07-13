@@ -2,11 +2,14 @@ import { View, Text, Image, Pressable } from "react-native";
 import React from "react";
 import { Avatar } from "react-native-paper";
 import { AlbumsWithUser } from "api/src/types/Prisma";
+import { useNavigation } from "@react-navigation/native";
+import { TabNavProps } from "../../Navigation";
 
 const AlbumsAvatar: React.FC<{ album: AlbumsWithUser }> = ({ album }) => {
+  const navigator = useNavigation<TabNavProps>()
   return (
     <Pressable onPress={() => {
-      console.log(album.album_image)
+        navigator.navigate('Album', {album_id: album.album_id, album_name: album.album_name});
     }}>
       <View style={{ alignItems: "center", marginRight: 20, marginTop: 20 }}>
         <Image

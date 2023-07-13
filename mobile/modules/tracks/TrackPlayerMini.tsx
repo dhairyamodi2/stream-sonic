@@ -50,7 +50,7 @@ const TrackPlayerMini = () => {
     const handlePlay = async () => {
         try {
             if (!sound) {
-                const s = await Audio.Sound.createAsync({ uri: `https://streamsonic.loca.lt/tracks/play/${track.track_id}` }, { shouldPlay })
+                const s = await Audio.Sound.createAsync({ uri: `https://streamsonic.loca.lt/tracks/play/${track!.track_id}` }, { shouldPlay })
                 s.sound.playAsync();
                 return;
             }

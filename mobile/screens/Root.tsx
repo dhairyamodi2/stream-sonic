@@ -32,6 +32,7 @@ import { SoundProvider } from "../providers/SoundContext";
 import {getAlbums} from 'common/src/modules/albums/albums.actions';
 import {getArtists} from 'common/src/modules/artists/artists.actions';
 import { getTracks } from "common/src/modules/tracks/tracks.actions";
+import Album from "./Album";
 const Tab = createBottomTabNavigator();
 const Root = function () {
   const navigator = useNavigation<Props>();
@@ -91,6 +92,7 @@ const Root = function () {
       {/* <TabNavigator /> */}
       <SoundProvider>
       <Tab.Navigator
+        backBehavior="history"
         screenOptions={{
           tabBarActiveTintColor: color_scheme,
           tabBarStyle: {
@@ -113,14 +115,21 @@ const Root = function () {
             backgroundColor: "black"
           },
           headerTintColor: "white",
-          headerTitleAlign: 'center'
+          headerTitleAlign: 'center',
           // headerLeft: () => {
           //   return (
-          //     <Entypo name="chevron-left" color={"white"} size={30}></Entypo>
-          //   );
-          // },
-        }}
+            //     <Entypo name="chevron-left" color={"white"} size={30}></Entypo>
+            //   );
+            // },
+          }}
       >
+        <Tab.Screen name="Album" component={Album} options={({route}) => ({
+            tabBarIcon: ({ color }) => (
+              <AntDesign name="pay-circle-o1" size={24} color={color} />
+            ),
+            headerShown: false,
+            tabBarItemStyle: { display: "none" },
+          })}/>
         <Tab.Screen
           name="Home"
           component={Home}
@@ -184,7 +193,6 @@ const Root = function () {
               <AntDesign name="pay-circle-o1" size={24} color={color} />
             ),
             tabBarItemStyle: { display: "none" },
-            
           }}
         />
       </Tab.Navigator>
