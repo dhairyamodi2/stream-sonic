@@ -64,7 +64,7 @@ export const LoginView = function () {
                     marginLeft: 10,
                     marginRight: 7,
                     fontWeight: 'bold',
-                }}>Continue With Google</Text>
+                }}>Yet to be implemented</Text>
             </Pressable>
 
             <Pressable style={{borderColor: 'grey', borderWidth: 1, padding: 15, borderRadius: 30, flexDirection: 'row', alignItems: 'center', marginTop: 20}} onPress={() => {
@@ -82,7 +82,7 @@ export const LoginView = function () {
                     marginLeft: 10,
                     marginRight: 7,
                     fontWeight: 'bold',
-                }}>Continue With Twitter</Text>
+                }}>Yet to be implemented</Text>
             </Pressable>
             
         </View>

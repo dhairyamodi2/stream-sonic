@@ -24,6 +24,7 @@ const AlbumsAvatar: React.FC<{ album: AlbumsWithUser }> = ({ album }) => {
             color: "white",
             fontSize: 15,
             marginTop: 7,
+            fontFamily: 'BalsamiqSans_400Regular'
           }}
         >
           {album.album_name.length > 13 ? album.album_name.substring(0, 13) : album.album_name}

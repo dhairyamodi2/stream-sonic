@@ -19,3 +19,6 @@ export type TracksWithArtists = Track & {artists : User[]}
 
 
 export type AlbumsWithUser = Album & {user : User}
+
+
+export type ArtistWithAlbumsAndTracks = User & {albums : Array<Album>, tracks : Array<TracksWithArtists>}

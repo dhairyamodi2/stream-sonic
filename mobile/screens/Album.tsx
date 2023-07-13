@@ -1,7 +1,7 @@
 import { View, Text, ToastAndroid } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native'
-import { TabNavProps, TabRouteProps } from '../Navigation';
+import { RouteProp, useIsFocused, useNavigation, useRoute } from '@react-navigation/native'
+import { TabNavParamsList, TabNavProps, TabRouteProps } from '../Navigation';
 import { getAlbum } from 'client/src/modules/albums/client';
 import { AlbumsWithTracksAndUser } from 'api/src/types/Prisma';
 import { ActivityIndicator } from 'react-native-paper';
@@ -16,7 +16,7 @@ import { PlayState } from 'common/src/modules/tracks/tracks.types';
 
 const Album = () => {
     const {track} = useSelector<State, PlayState>(state => state.playback)
-    const route = useRoute<TabRouteProps>();
+    const route = useRoute<RouteProp<TabNavParamsList, 'Album'>>();
     const navigator = useNavigation<TabNavProps>();
     const [loading, setLoading] = useState(true);
     const [album, setAlbum] = useState<AlbumsWithTracksAndUser>()
@@ -35,7 +35,7 @@ const Album = () => {
                 console.log(err);
             })
         }
-    }, [route.params])
+    }, [route.params.album_id])
     const focus = useIsFocused();
     if (loading || !album) {
         return <LinearGradient colors={gradient_scheme} style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}><ActivityIndicator color={color_scheme} size={75} /></LinearGradient>

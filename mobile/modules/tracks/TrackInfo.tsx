@@ -1,7 +1,7 @@
 import { View, Text, Image, Pressable } from 'react-native'
 import React from 'react'
 import { FontAwesome5 } from '@expo/vector-icons'
-import { TracksWithArtists } from 'api/src/types/Prisma'
+import { Track, TracksWithArtists } from 'api/src/types/Prisma'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useDispatch } from 'react-redux'
 import { playTracks } from 'common/src/modules/tracks/tracks.actions'
@@ -44,7 +44,7 @@ const TrackInfo: React.FC<{ track: TracksWithArtists }> = ({ track }) => {
                     />
 
                     <View>
-                        <Text style={{ color: "white", fontWeight: "900", fontSize: 15 }}>
+                        <Text style={{ color: "white", fontSize: 15, fontFamily: 'BalsamiqSans_400Regular' }}>
                             {track.track_name}
                         </Text>
                         <Text style={{ color: "white", fontSize: 10 }}>

@@ -31,12 +31,6 @@ const AlbumDetail: React.FC<{ album: AlbumsWithTracksAndUser }> = ({ album }) =>
                 {album.tracks.map((track) => {
                     return <TrackInfo track={track} key={track.track_id}/>
                 })}
-                {album.tracks.map((track) => {
-                    return <TrackInfo track={track} key={track.track_id}/>
-                })}
-                {album.tracks.map((track) => {
-                    return <TrackInfo track={track} key={track.track_id}/>
-                })}
                 </ScrollView>
             </LinearGradient>
 

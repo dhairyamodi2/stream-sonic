@@ -11,6 +11,7 @@ import { PlayState } from "common/src/modules/tracks/tracks.types";
 import { START_PLAYING, STOP_PLAYING } from "common/src/constants";
 import { useFocusEffect } from "@react-navigation/native";
 import { Sound, SoundContext } from "../../providers/SoundContext";
+import { backendUri } from "../../envConstants";
 
 const TrackPlayerMini = () => {
     const { track, shouldPlay, playing } = useSelector<State, PlayState>(state => state.playback)
@@ -26,13 +27,13 @@ const TrackPlayerMini = () => {
                         sound.sound.stopAsync();
                         sound.sound.unloadAsync();
                         dispatch({ type: STOP_PLAYING })
-                        const s = await Audio.Sound.createAsync({ uri: `https://streamsonic.loca.lt/tracks/play/${track.track_id}` }, { shouldPlay })
+                        const s = await Audio.Sound.createAsync({ uri: `${backendUri}/tracks/play/${track.track_id}` }, { shouldPlay })
                         dispatch({ type: START_PLAYING })
                         setSound(s);
                         return;
                     }
                     else {
-                        const s = await Audio.Sound.createAsync({ uri: `https://streamsonic.loca.lt/tracks/play/${track.track_id}` }, { shouldPlay })
+                        const s = await Audio.Sound.createAsync({ uri: `${backendUri}/tracks/play/${track.track_id}` }, { shouldPlay })
                         setSound(s);
                     }
                     console.log('played');
@@ -50,7 +51,7 @@ const TrackPlayerMini = () => {
     const handlePlay = async () => {
         try {
             if (!sound) {
-                const s = await Audio.Sound.createAsync({ uri: `https://streamsonic.loca.lt/tracks/play/${track!.track_id}` }, { shouldPlay })
+                const s = await Audio.Sound.createAsync({ uri: `${backendUri}/tracks/play/${track!.track_id}` }, { shouldPlay })
                 s.sound.playAsync();
                 return;
             }
@@ -102,7 +103,7 @@ const TrackPlayerMini = () => {
                 />
 
                 <View>
-                    <Text style={{ color: "white", fontWeight: "900", fontSize: 15 }}>
+                    <Text style={{ color: "white", fontFamily: 'BalsamiqSans_400Regular', fontSize: 15 }}>
                         {track.track_name}
                     </Text>
                     <Text style={{ color: "white", fontSize: 10 }}>

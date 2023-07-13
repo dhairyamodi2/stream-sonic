@@ -20,8 +20,7 @@ const Search = () => {
             <Text style={{
                 color: 'white',
                 fontSize: 24,
-                fontWeight: '900',
-                fontFamily: 'sans-serif',
+                fontFamily: 'BalsamiqSans_400Regular',
                 letterSpacing: 0.75,
                 flex: 0.075,
             }}>

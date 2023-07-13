@@ -17,6 +17,7 @@ const TrackAvatar : React.FC<{track : TracksWithArtists}> = ({track}) => {
           color: "white",
           fontSize: 15,
           marginTop: 7,
+          fontFamily: 'BalsamiqSans_400Regular'
         }}
       >
         {track.track_name.length > 13 ? track.track_name.substring(0, 13) : track.track_name}

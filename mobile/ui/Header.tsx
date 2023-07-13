@@ -16,9 +16,8 @@ const Header = function () {
             <Text style={{
                 color: 'white',
                 fontSize: 24,
-                fontWeight: '900',
-                fontFamily: 'sans-serif',
-                letterSpacing: 0.75,
+                fontFamily: 'BalsamiqSans_700Bold',
+                letterSpacing: 1.2,
                 flex: 5
             }}>
                 Good Evening

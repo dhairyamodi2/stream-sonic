@@ -13,9 +13,10 @@ const Heading: React.FC<{ text: string; icon?: any, route? : 'Artists' | 'Top Tr
       <Text
         style={{
           fontSize: 20,
-          fontWeight: "700",
+          // fontWeight: "700",
           color: "white",
-          fontFamily: "sans-serif",
+          fontFamily: "BalsamiqSans_400Regular",
+          letterSpacing: 0.7
         }}
       >
         {text}
@@ -32,7 +33,7 @@ const Heading: React.FC<{ text: string; icon?: any, route? : 'Artists' | 'Top Tr
                 fontSize: 16,
                 fontWeight: "700",
                 color: color_scheme,
-                fontFamily: "sans-serif",
+                fontFamily: "Ubuntu_400Regular",
               }}
             >
               All

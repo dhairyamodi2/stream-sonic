@@ -29,10 +29,11 @@ import Search from "./Search";
 import Tracks from "./Tracks";
 import TrackPlayerMini from "../modules/tracks/TrackPlayerMini";
 import { SoundProvider } from "../providers/SoundContext";
-import {getAlbums} from 'common/src/modules/albums/albums.actions';
-import {getArtists} from 'common/src/modules/artists/artists.actions';
+import { getAlbums } from 'common/src/modules/albums/albums.actions';
+import { getArtists } from 'common/src/modules/artists/artists.actions';
 import { getTracks } from "common/src/modules/tracks/tracks.actions";
 import Album from "./Album";
+import Artist from "./Artist";
 const Tab = createBottomTabNavigator();
 const Root = function () {
   const navigator = useNavigation<Props>();
@@ -79,9 +80,9 @@ const Root = function () {
   // }, [isAuthenticated, isLoading, visited])
   const dispatch = useDispatch();
   useEffect(() => {
-     dispatch(getAlbums() as any);
-     dispatch(getArtists() as any)
-     dispatch(getTracks() as any);
+    dispatch(getAlbums() as any);
+    dispatch(getArtists() as any)
+    dispatch(getTracks() as any);
   }, [])
   return (
     <View style={{ flex: 1 }}>
@@ -91,111 +92,123 @@ const Root = function () {
       {/* </LinearGradient> */}
       {/* <TabNavigator /> */}
       <SoundProvider>
-      <Tab.Navigator
-        backBehavior="history"
-        screenOptions={{
-          tabBarActiveTintColor: color_scheme,
-          tabBarStyle: {
-            backgroundColor: "black",
-            borderTopWidth: 0.5,
-            borderTopColor: "#414141",
-            padding: 5,
-            height: 60,
-            shadowColor: "white",
-            shadowOffset: { width: -2, height: 5 },
-            shadowOpacity: 0.2,
-            shadowRadius: 5,
-          },
-          tabBarIconStyle: {
-            color: color_scheme,
-            height: 5,
-            margin: 5,
-          },
-          headerStyle: {
-            backgroundColor: "black"
-          },
-          headerTintColor: "white",
-          headerTitleAlign: 'center',
-          // headerLeft: () => {
-          //   return (
+        <Tab.Navigator
+          backBehavior="history"
+          screenOptions={{
+            tabBarActiveTintColor: color_scheme,
+            tabBarStyle: {
+              backgroundColor: "black",
+              borderTopWidth: 0.5,
+              borderTopColor: "#414141",
+              padding: 5,
+              height: 60,
+              shadowColor: "white",
+              shadowOffset: { width: -2, height: 5 },
+              shadowOpacity: 0.2,
+              shadowRadius: 5,
+            },
+            tabBarIconStyle: {
+              color: color_scheme,
+              height: 5,
+              margin: 5,
+            },
+            tabBarLabelStyle: {
+              fontFamily: 'BalsamiqSans_400Regular'
+            },
+            headerStyle: {
+              backgroundColor: "black"
+            },
+            headerTintColor: "white",
+            headerTitleAlign: 'center',
+            // headerLeft: () => {
+            //   return (
             //     <Entypo name="chevron-left" color={"white"} size={30}></Entypo>
             //   );
             // },
           }}
-      >
-        <Tab.Screen name="Album" component={Album} options={({route}) => ({
+        >
+
+          <Tab.Screen
+            name="Home"
+            component={Home}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <AntDesign name="home" size={24} color={color} />
+              ),
+              headerShown: false,
+            }}
+          />
+
+          <Tab.Screen
+            name="Search"
+            component={Search}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <AntDesign name="search1" size={24} color={color} />
+              ),
+              headerShown: false,
+            }}
+          />
+
+          <Tab.Screen
+            name="Native"
+            component={LoginView}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <AntDesign name="book" size={24} color={color} />
+              ),
+              headerShown: false
+            }}
+          />
+
+          <Tab.Screen
+            name="Headache"
+            component={LoginView}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <AntDesign name="pay-circle-o1" size={24} color={color} />
+              ),
+              headerShown: false
+            }}
+          />
+
+          <Tab.Screen
+            name="Artists"
+            component={Artists}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <AntDesign name="pay-circle-o1" size={24} color={color} />
+              ),
+              tabBarItemStyle: { display: "none" },
+
+            }}
+          />
+          <Tab.Screen
+            name="Top Tracks"
+            component={Tracks}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <AntDesign name="pay-circle-o1" size={24} color={color} />
+              ),
+              tabBarItemStyle: { display: "none" },
+            }}
+          />
+          <Tab.Screen name="Album" component={Album} options={({ route }) => ({
             tabBarIcon: ({ color }) => (
               <AntDesign name="pay-circle-o1" size={24} color={color} />
             ),
             headerShown: false,
             tabBarItemStyle: { display: "none" },
-          })}/>
-        <Tab.Screen
-          name="Home"
-          component={Home}
-          options={{
+          })} />
+          <Tab.Screen name="Artist" component={Artist} options={({ route }) => ({
             tabBarIcon: ({ color }) => (
-              <AntDesign name="home" size={24} color={color} />
+              <AntDesign name="pay-circle-o1" size={24} color={color} />
             ),
             headerShown: false,
-          }}
-        />
-
-        <Tab.Screen
-          name="Search"
-          component={Search}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <AntDesign name="search1" size={24} color={color} />
-            ),
-            headerShown: false,
-          }}
-        />
-
-        <Tab.Screen
-          name="Native"
-          component={LoginView}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <AntDesign name="book" size={24} color={color} />
-            ),
-            headerShown: false
-          }}
-        />
-
-        <Tab.Screen
-          name="Headache"
-          component={LoginView}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <AntDesign name="pay-circle-o1" size={24} color={color} />
-            ),
-            headerShown: false
-          }}
-        />
-
-        <Tab.Screen
-          name="Artists"
-          component={Artists}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <AntDesign name="pay-circle-o1" size={24} color={color} />
-            ),
             tabBarItemStyle: { display: "none" },
-            
-          }}
-        />
-        <Tab.Screen
-          name="Top Tracks"
-          component={Tracks}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <AntDesign name="pay-circle-o1" size={24} color={color} />
-            ),
-            tabBarItemStyle: { display: "none" },
-          }}
-        />
-      </Tab.Navigator>
+          })} />
+        </Tab.Navigator>
+
       </SoundProvider>
     </View>
   );

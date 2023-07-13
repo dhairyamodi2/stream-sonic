@@ -15,7 +15,8 @@ export type TabNavParamsList = {
     Search : undefined;
     Artists : undefined;
     ["Top Tracks"] : undefined;
-    Album : {album_id : string, album_name : string}
+    Album : {album_id : string, album_name : string};
+    Artist : {artist_id : string}
 }
 
 
