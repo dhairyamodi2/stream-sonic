@@ -1,13 +1,15 @@
 import { View, Text, ScrollView, Image, Pressable } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Avatar } from 'react-native-paper'
 import { gradient_scheme } from '../../constants'
 import TrackInfo from '../tracks/TrackInfo'
 import { ArtistWithAlbumsAndTracks } from 'api/src/types/Prisma'
 import CustomText from '../../ui/CustomText'
+import AlbumInfo from '../albums/AlbumInfo'
 
 const ArtistDetail: React.FC<{ artist: ArtistWithAlbumsAndTracks }> = ({ artist }) => {
+    const [tag, setTag] = useState<'song' | 'album'>('song');
     return (
         <View style={{ flex: 1 }}>
             <LinearGradient style={{ flex: 0.35 }} colors={["#565656", "#262424"]} >
@@ -28,17 +30,25 @@ const ArtistDetail: React.FC<{ artist: ArtistWithAlbumsAndTracks }> = ({ artist 
             <LinearGradient colors={gradient_scheme} style={{ flex: 0.65, padding: 20 }}>
 
                 <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                    <Pressable style={{padding: 15, backgroundColor:'#FFFFFF12', borderRadius: 7}}>
+                    <Pressable style={{padding: 15, backgroundColor: tag === 'song' ? 'black' : '#FFFFFF12', borderRadius: 7}} onPress={() => {
+                        setTag('song')
+                    }}>
                         <Text style={{color: 'white', fontSize: 15, fontFamily: 'BalsamiqSans_400Regular'}}>Songs</Text>
                     </Pressable>
 
-                    <Pressable style={{padding: 15,  backgroundColor:'#FFFFFF12', borderRadius: 7}}>
+                    <Pressable style={{padding: 15,  backgroundColor: tag === 'album' ? 'black' : '#FFFFFF12', borderRadius: 7}} onPress={() => {
+                        setTag('album')
+                    }}>
                     <Text style={{color: 'white', fontSize: 15, fontFamily: 'BalsamiqSans_400Regular'}}>Albums</Text>
                     </Pressable>
                 </View>
-                <ScrollView>
-                    {artist.tracks.map((track) => {
+                <ScrollView style={{marginTop: 20}}>
+                    {tag === 'song' && artist.tracks.map((track) => {
                         return <TrackInfo track={track} key={track.track_id}/>
+                    })}
+
+                    {tag === 'album' && artist.albums.map((album) => {
+                        return <AlbumInfo album={album} key={album.album_id}/>
                     })}
                 </ScrollView>
             </LinearGradient>
