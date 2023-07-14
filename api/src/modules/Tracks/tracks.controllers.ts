@@ -117,6 +117,6 @@ export const playTrack = async (req: Request<{ id?: string }>, res: Response) =>
         stream.pipe(res)
     } catch (error) {
         console.log(error);
-
+        InternalServerError(res)
     }
 }

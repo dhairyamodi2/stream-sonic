@@ -1,0 +1,3 @@
+LOAD DATABASE
+    FROM mysql://dhairya:dhairya@localhost:3306/streamsonic
+    INTO postgres://dhairyamodi45:dhairya@localhost:6754/streamsonic
