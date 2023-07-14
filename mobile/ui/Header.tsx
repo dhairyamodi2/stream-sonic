@@ -6,7 +6,7 @@ import { Text, View } from "react-native";
 
 const Header = function () {
     return (
-        <View style={{flex: 0.1}}>
+        <View style={{height: 50, }}>
         <View style={{
             flexDirection: 'row',
             justifyContent: 'space-between',

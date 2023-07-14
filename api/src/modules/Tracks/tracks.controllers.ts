@@ -62,9 +62,10 @@ export const getAllTracks = async (req: Request<any, any, any, { track_name: str
 
         let tracks = await OrmClient.track.findMany({
             where: {
+                
                 track_name: {
                     contains: track_name
-                }
+                },
             },
             include: {
                 artists: true

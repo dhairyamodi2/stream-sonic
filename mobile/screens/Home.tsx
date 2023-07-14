@@ -19,7 +19,7 @@ const Home = function () {
     return (
         <LinearGradient colors={gradient_scheme} style={{ flex: 1, padding: 10 }}>
             <Header />
-            <View style={{ flex: track ? 0.8 : 0.9 }}>
+            <View style={{ flex: 1 }}>
                 <ScrollView style={{ paddingLeft: 10, paddingTop: 10, paddingBottom: 50 }}>
                     <Artists></Artists>
                     <Albums></Albums>
@@ -29,7 +29,7 @@ const Home = function () {
                 </ScrollView>
 
             </View>
-            {focus && <View style={{ flex: track ? 0.1 : 0 }}>
+            {focus && <View style={{ height: track ? 70 : 0 }}>
                 <TrackPlayerMini />
             </View>}
 

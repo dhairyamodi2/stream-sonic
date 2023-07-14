@@ -11,7 +11,7 @@ export const getAlbums = function () {
                 message: 'Loading...'
             }
         })
-        const {data, message} = await fetchAlbums();
+        const {data, message} = await fetchAlbums({});
         dispatch({
             type: GET_ALBUMS__SUC,
             payload: {

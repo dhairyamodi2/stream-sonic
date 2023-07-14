@@ -9,7 +9,7 @@ import { playTracks } from 'common/src/modules/tracks/tracks.actions'
 const TrackInfo: React.FC<{ track: TracksWithArtists }> = ({ track }) => {
     const dispatch = useDispatch();
     const handlePress = async function () {
-        await AsyncStorage.setItem("track", JSON.stringify(track));
+        // await AsyncStorage.setItem("track", JSON.stringify(track));
         dispatch(playTracks(track, true) as any);
     }
     return (

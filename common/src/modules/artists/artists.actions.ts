@@ -11,7 +11,7 @@ export const getArtists = function () {
             payload: {}
         })
 
-        const {data, message} = await fetchArtists();
+        const {data, message} = await fetchArtists({});
         dispatch({
             type: ARTISTS_SUC,
             payload: {

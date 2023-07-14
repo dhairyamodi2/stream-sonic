@@ -45,8 +45,8 @@ const Album = () => {
   return (
     <View style={{flex: 1, backgroundColor: 'black'}}>
         
-       {album && <View style={{flex : track ? 0.9 : 1}}><AlbumDetail album={album}/></View>}
-       {focus && <View style={{flex:track ? 0.1 : 0}}>
+       {album && <View style={{flex : 1}}><AlbumDetail album={album}/></View>}
+       {focus && <View style={{height: track ? 70 : 0}}>
         <TrackPlayerMini />
        </View>}
     </View>

@@ -5,9 +5,15 @@ import { User } from "@prisma/client";
 import { HandleNotFound, HandlePrismaExceptions } from "../../Exceptions/Handlers";
 import { ArtistWithAlbumsAndTracks } from "../../types/Prisma";
 
-export const getAll = async function (req : Request, res : Response) {
+export const getAll = async function (req : Request<any, any, any,{name? : string}>, res : Response) {
     try {
-        const artists = await OrmClient.user.findMany();
+        const artists = await OrmClient.user.findMany({
+            where: {
+                name: {
+                    contains: req.query.name
+                }
+            }
+        });
         respond<Array<User>>(200, true, artists, res);
     } catch (error) {
         console.log(error);

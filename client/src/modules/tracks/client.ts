@@ -3,9 +3,13 @@ import { http } from "../../http"
 import { ResponseType } from "../../types/types";
 import { HandleError } from "../../utils/HandleError";
 
-export const fetchTracks = async () => {
+export const fetchTracks = async ({track_name, limit} : {track_name? : string, limit?: number}) => {
     try {
-        const {data} = await http.get<ResponseType<Array<TracksWithArtists>>>('/tracks/all');
+        let uri = '/tracks/all?';
+        if (track_name) {
+            uri += `track_name=${track_name}&`
+        }
+        const {data} = await http.get<ResponseType<Array<TracksWithArtists>>>(uri);
         if (data.data) {
             return {
                 data: data.data,
