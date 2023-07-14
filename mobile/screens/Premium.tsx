@@ -4,6 +4,7 @@ import { Avatar } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import { color_scheme, gradient_scheme } from "../constants";
 import { Entypo } from "@expo/vector-icons";
+import { popToast } from "../utils/showToast";
 
 const Premium = () => {
     return (
@@ -55,6 +56,7 @@ const Premium = () => {
                                 padding: 10,
                                 borderRadius: 5
                             }}
+                            onPress={popToast}
                         >
                             <Text
                                 style={{
@@ -89,8 +91,8 @@ const Premium = () => {
                     width: '60%',
                     marginTop: 20,
                     justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
+                    alignItems: 'center',
+                }} onPress={popToast}>
                     <Text style={{
                         color: "black",
                         letterSpacing: 1,
