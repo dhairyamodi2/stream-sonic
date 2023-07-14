@@ -10,8 +10,10 @@ export const getAll = async function (req : Request<any, any, any,{name? : strin
         const artists = await OrmClient.user.findMany({
             where: {
                 name: {
-                    contains: req.query.name
-                }
+                    contains: req.query.name,
+                    mode: 'insensitive'
+                },
+                user_type: 'artist'
             }
         });
         respond<Array<User>>(200, true, artists, res);
@@ -29,7 +31,7 @@ export const getArtist = async function (req : Request<{id? : string}>, res : Re
 
         const user = await OrmClient.user.findUnique({
             where : {
-                user_id: id
+                user_id: id,
             },
             include: {
                 albums: true,

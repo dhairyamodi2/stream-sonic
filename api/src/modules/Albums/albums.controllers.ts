@@ -85,7 +85,8 @@ export const getAll = async (req : Request<any, any, any, {album_name? : string,
         let albums = await OrmClient.album.findMany({
             where: {
                 album_name: {
-                    contains: album_name
+                    contains: album_name,
+                    mode: 'insensitive'
                 }
             },
             include: {

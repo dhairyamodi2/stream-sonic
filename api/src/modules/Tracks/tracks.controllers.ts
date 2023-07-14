@@ -65,7 +65,8 @@ export const getAllTracks = async (req: Request<any, any, any, { track_name: str
             where: {
                 
                 track_name: {
-                    contains: track_name
+                    contains: track_name,
+                    mode: 'insensitive'
                 },
             },
             include: {
