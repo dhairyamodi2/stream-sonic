@@ -9,6 +9,7 @@ import { Worker } from "cluster";
 import WorkerThread from "../../worker-threads/config";
 import { file_uri } from "../../constants";
 import fs from 'fs'
+import { bucket } from "../../config/firebase";
 
 export const AddTracks = async (req: Request, res: Response) => {
     try {
@@ -112,9 +113,9 @@ export const playTrack = async (req: Request<{ id?: string }>, res: Response) =>
             return;
         }
         const filePath = path.resolve(file_uri, `./${req.params.id}.mp3`);
-        const stream = fs.createReadStream(filePath);
-        console.log('streaming now');
-        stream.pipe(res)
+        const file = bucket.file(`${req.params.id}.mp3`);
+        const stream = file.createReadStream();
+        stream.pipe(res);
     } catch (error) {
         console.log(error);
         InternalServerError(res)

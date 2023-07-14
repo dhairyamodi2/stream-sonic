@@ -34,6 +34,7 @@ import { getArtists } from 'common/src/modules/artists/artists.actions';
 import { getTracks } from "common/src/modules/tracks/tracks.actions";
 import Album from "./Album";
 import Artist from "./Artist";
+import Premium from "./Premium";
 const Tab = createBottomTabNavigator();
 const Root = function () {
   const navigator = useNavigation<Props>();
@@ -127,7 +128,16 @@ const Root = function () {
             // },
           }}
         >
-
+          <Tab.Screen
+            name="Premium"
+            component={Premium}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <AntDesign name="pay-circle-o1" size={24} color={color} />
+              ),
+              headerShown: false
+            }}
+          />
           <Tab.Screen
             name="Home"
             component={Home}
@@ -161,16 +171,7 @@ const Root = function () {
             }}
           />
 
-          <Tab.Screen
-            name="Headache"
-            component={LoginView}
-            options={{
-              tabBarIcon: ({ color }) => (
-                <AntDesign name="pay-circle-o1" size={24} color={color} />
-              ),
-              headerShown: false
-            }}
-          />
+          
 
           <Tab.Screen
             name="Artists"
