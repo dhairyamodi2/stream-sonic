@@ -1,4 +1,4 @@
-import { View, Text, Image, ImageBackground, Pressable } from "react-native";
+import { View, Text, Image, ImageBackground, Pressable, ScrollView } from "react-native";
 import React from "react";
 import { Avatar } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
@@ -96,13 +96,13 @@ const Premium = () => {
                     <Text style={{
                         color: "black",
                         letterSpacing: 1,
-                        fontSize: 18,
+                        fontSize: 16,
                         fontFamily: "BalsamiqSans_700Bold",
                     }}>GET PREMIUM</Text>
                 </Pressable>
 
-
-                <View style={{ backgroundColor: '#FFFFFF12', alignItems: 'flex-start', width: '93%', margin: 20, borderRadius: 7 }}>
+                <ScrollView style={{marginTop: 10}}>
+                <View style={{ backgroundColor: '#FFFFFF12', alignItems: 'flex-start', width: '90%', margin: 20, borderRadius: 7 }}>
                     <Text style={{
                         color: "white",
                         letterSpacing: 1,
@@ -154,6 +154,7 @@ const Premium = () => {
                     </View>
                     
                 </View>
+                </ScrollView>
 
 
             </LinearGradient>

@@ -11,7 +11,7 @@ const Genre : React.FC<GenreProps> = ({name, backgroundColor, imageSrc}) => {
   return (
     <Pressable onPress={popToast}>
     <View style={{marginTop: 15}}>
-      <View style={{ width: 180, height: 150, backgroundColor: backgroundColor , justifyContent: 'space-between', borderRadius: 8}}>
+      <View style={{ width: 170, height: 150, backgroundColor: backgroundColor , justifyContent: 'space-between', borderRadius: 8}}>
         <Text style={{
             alignSelf: 'flex-start',
             color: 'white',
