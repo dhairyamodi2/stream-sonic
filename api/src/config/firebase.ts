@@ -1,6 +1,6 @@
 import admin, { ServiceAccount } from 'firebase-admin';
 //@ts-ignore
-import serviceAccount from './serviceAccountKey.json'; 
+import serviceAccount from '../../serviceAccountKey.json'; 
 
 import firebase from 'firebase/app';
 import {ref } from 'firebase/storage';
