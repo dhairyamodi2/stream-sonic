@@ -4,3 +4,5 @@ node_modules
 B1qbcMWRCgpRtYRn
 
 dist
+
+src/config/serviceAccountKey.json

@@ -3,9 +3,9 @@ import { http } from "../../http"
 import { ResponseType } from "../../types/types";
 import { HandleError } from "../../utils/HandleError";
 
-export const fetchArtists = async function () {
+export const fetchArtists = async function ({name}: {name? : string}) {
     try {
-        const {data} = await http.get<ResponseType<Array<User>>>('/artists/all');
+        const {data} = await http.get<ResponseType<Array<User>>>(`/artists/all${name ? `?name=${name}` : ''}`);
         if (data && data.data) {
             return {
                 data : data.data,

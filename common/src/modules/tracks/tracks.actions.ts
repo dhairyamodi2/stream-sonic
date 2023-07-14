@@ -11,7 +11,7 @@ export const getTracks = function () {
             payload: {tracks: [], message: 'Loading...'}
         })
 
-        const {message, data} = await fetchTracks();
+        const {message, data} = await fetchTracks({});
         dispatch({
             type: GET_TRACKS__SUC,
             payload: {tracks: data, message: ''}

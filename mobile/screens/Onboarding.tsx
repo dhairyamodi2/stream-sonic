@@ -7,46 +7,55 @@ import { RootStackParamsList } from "../Navigation";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import * as SecureStore from 'expo-secure-store'
 import { useDispatch, useSelector } from "react-redux";
-import { onboarding, setVisited } from "common/src/modules/auth/auth.actions";
+import { me, onboarding, setVisited } from "common/src/modules/auth/auth.actions";
 import { State } from "common/src/store";
 import { AuthState } from "common/src/modules/auth/auth.types";
+import { LinearGradient } from "expo-linear-gradient";
+import { color_scheme, gradient_scheme } from "../constants";
+import { ActivityIndicator } from "react-native-paper";
 
 type Props = NativeStackNavigationProp<RootStackParamsList, 'Onboarding'>
 export const Onboarding = function () {
-    const navigation = useNavigation<Props>();
-    const [date, setDate] = useState<Date>();
-    const [picked, setPicked] = useState(false);
+    // const navigator = useNavigation<Props>();
 
-    const {isLoading, user, message} = useSelector<State, AuthState>(state => state.auth);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (isLoading === false) {
-            if(user && user?.completedProfile === true) {
-                navigation.replace('Root');
-            }
-            else {
-                ToastAndroid.show(message, 1000);
-            }
-        }
-    }, [isLoading, user,message])
-    useEffect(()=> {
-        async function wrapper() {
-            if (date != undefined && picked == false) {
-                const token = await SecureStore.getItemAsync("token");
-                if(token) {
-                    console.log(date);
-                    dispatch(onboarding({birthDate: date, token: token}) as any)
-                }
-                
-            }
-        }
-        wrapper();
-    }, [date, picked])
+    // const {isLoading, user, message, isAuthenticated, visited} = useSelector<State, AuthState>(state => state.auth);
+    // const dispatch = useDispatch();
+    // useEffect(() => {
+    //     console.log('from home')
+    //     console.log(visited);
+    // }, [])
+    // useEffect(() => {
+    //     if (visited === false) {
+    //         console.log('dispatched');
+    //         SecureStore.getItemAsync("token").then((item) => {
+    //             if(!item) {
+    //                 console.log('item')
+    //                 console.log(item);
+    //                 navigator.navigate('Login');
+    //                 return;
+    //             }
+    //             dispatch(me(item) as any)
+    //         })
+    //     }
+    // }, [visited])
+  
+    // useEffect(() => {
+    //     if (visited === true && isAuthenticated === false && isLoading === false) {
+    //        navigator.replace('Login');
+    //     }
+  
+    //     if (isAuthenticated === true) {
+    //         if (!user){
+    //             navigator.replace('Login');
+    //             return;
+    //         }
+    //         navigator.replace('Root');
+    //     }
+    //     console.log(isAuthenticated);
+    // }, [isAuthenticated, isLoading, visited])
     return (
-        <View>
-            <Text>Onboarding</Text>
-            <DatePicker value={new Date()} textColor="white" themeVariant="dark" display='spinner' onChange={(_, date) => {setDate(date)}}></DatePicker>
-        </View>
+        <LinearGradient colors={gradient_scheme} style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            {/* <ActivityIndicator color={color_scheme} size={50}/> */}
+        </LinearGradient>
     )
 }

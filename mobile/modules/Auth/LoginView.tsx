@@ -41,7 +41,7 @@ export const LoginView = function () {
                 SecureStore.setItemAsync("token", params.queryParams.token as string).then((data)=> {
                     dispatch(setVisited() as any);
                     console.log('set visited to false')
-                    navigation.navigate('Root');
+                    navigation.navigate('Onboarding');
                 }).catch((err) => {
                     ToastAndroid.show(err, 1000);
                 })

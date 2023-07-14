@@ -22,12 +22,12 @@ const Tracks = () => {
         <LinearGradient colors={gradient_scheme} style={{
             flex: 1
         }}>
-            <View style={{flex: track ? 0.9: 1}}>
+            <View style={{flex: 1}}>
                 {tracks.length === 0 && isLoading ? <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <ActivityIndicator animating={true} color={'#FBC02D'} size={80} />
                 </View> : <TrackList />}
             </View>
-            {focussed && <View style={{ flex: track ? 0.1 : 0 }}>
+            {focussed && <View style={{ height: track ? 70 : 0 }}>
                 <TrackPlayerMini />
             </View>}
 

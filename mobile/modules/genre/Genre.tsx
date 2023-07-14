@@ -1,5 +1,6 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 import React from "react";
+import { popToast } from "../../utils/showToast";
 
 interface GenreProps {
     name : string;
@@ -8,8 +9,9 @@ interface GenreProps {
 }
 const Genre : React.FC<GenreProps> = ({name, backgroundColor, imageSrc}) => {
   return (
+    <Pressable onPress={popToast}>
     <View style={{marginTop: 15}}>
-      <View style={{ width: 180, height: 150, backgroundColor: backgroundColor , justifyContent: 'space-between', borderRadius: 8}}>
+      <View style={{ width: 170, height: 150, backgroundColor: backgroundColor , justifyContent: 'space-between', borderRadius: 8}}>
         <Text style={{
             alignSelf: 'flex-start',
             color: 'white',
@@ -36,6 +38,7 @@ const Genre : React.FC<GenreProps> = ({name, backgroundColor, imageSrc}) => {
         </View>
       </View>
     </View>
+    </Pressable>
   );
 };
 

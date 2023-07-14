@@ -34,6 +34,10 @@ import { getArtists } from 'common/src/modules/artists/artists.actions';
 import { getTracks } from "common/src/modules/tracks/tracks.actions";
 import Album from "./Album";
 import Artist from "./Artist";
+import Premium from "./Premium";
+import { AlbumState } from "common/src/modules/albums/albums.types";
+import { TrackState } from "common/src/modules/tracks/tracks.types";
+import { ArtistsState } from "common/src/modules/artists/artists.types";
 const Tab = createBottomTabNavigator();
 const Root = function () {
   const navigator = useNavigation<Props>();
@@ -42,48 +46,14 @@ const Root = function () {
   // const {visited, isAuthenticated, isLoading, message, user} = useSelector<State, AuthState>(state => state.auth)
 
   // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //     console.log('from home')
-  //     console.log(visited);
-  // }, [])
-  // useEffect(() => {
-  //     if (visited === false) {
-  //         console.log('dispatched');
-  //         SecureStore.getItemAsync("token").then((item) => {
-  //             if(!item) {
-  //                 console.log('item')
-  //                 console.log(item);
-  //                 navigator.navigate('Login');
-  //                 return;
-  //             }
-  //             dispatch(me(item) as any)
-  //         })
-  //     }
-  // }, [visited])
-
-  // useEffect(() => {
-  //     if (visited === true && isAuthenticated === false && isLoading === false) {
-  //        navigator.replace('Login');
-  //     }
-
-  //     if (isAuthenticated === true) {
-  //         if (!user){
-  //             navigator.replace('Login');
-  //             return;
-  //         }
-  //         console.log(user.completedProfile);
-  //         if (user.completedProfile === false && visited === true) {
-  //             navigator.replace('Onboarding');
-  //         }
-  //     }
-  // }, [isAuthenticated, isLoading, visited])
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getAlbums() as any);
     dispatch(getArtists() as any)
     dispatch(getTracks() as any);
   }, [])
+
   return (
     <View style={{ flex: 1 }}>
       {/* <LinearGradient colors={gradient_scheme} style={{ flex: 0.9,  justifyContent: 'center', alignItems: 'center' }}> */}
@@ -150,34 +120,16 @@ const Root = function () {
             }}
           />
 
-          <Tab.Screen
-            name="Native"
-            component={LoginView}
-            options={{
-              tabBarIcon: ({ color }) => (
-                <AntDesign name="book" size={24} color={color} />
-              ),
-              headerShown: false
-            }}
-          />
+          
 
-          <Tab.Screen
-            name="Headache"
-            component={LoginView}
-            options={{
-              tabBarIcon: ({ color }) => (
-                <AntDesign name="pay-circle-o1" size={24} color={color} />
-              ),
-              headerShown: false
-            }}
-          />
+
 
           <Tab.Screen
             name="Artists"
             component={Artists}
             options={{
               tabBarIcon: ({ color }) => (
-                <AntDesign name="pay-circle-o1" size={24} color={color} />
+                <Entypo name="500px" size={24} color={color} />
               ),
               tabBarItemStyle: { display: "none" },
 
@@ -207,6 +159,17 @@ const Root = function () {
             headerShown: false,
             tabBarItemStyle: { display: "none" },
           })} />
+
+          <Tab.Screen
+            name="Premium"
+            component={Premium}
+            options={{
+              tabBarIcon: ({ color }) => (
+                <Entypo name="500px" size={24} color={color} />
+              ),
+              headerShown: false
+            }}
+          />
         </Tab.Navigator>
 
       </SoundProvider>
