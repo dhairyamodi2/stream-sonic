@@ -51,8 +51,8 @@ const Premium = () => {
                             style={{
                                 backgroundColor: "rgba(52, 52, 52, 0.8)",
                                 flexDirection: 'row',
-                                justifyContent: 'flex-start',
-                                width: 100,
+                                justifyContent: 'center',
+                                width: 150,
                                 padding: 10,
                                 borderRadius: 5
                             }}
@@ -102,7 +102,7 @@ const Premium = () => {
                 </Pressable>
 
 
-                <View style={{ backgroundColor: '#FFFFFF12', alignItems: 'flex-start', width: '93%', margin: 20 }}>
+                <View style={{ backgroundColor: '#FFFFFF12', alignItems: 'flex-start', width: '93%', margin: 20, borderRadius: 7 }}>
                     <Text style={{
                         color: "white",
                         letterSpacing: 1,
@@ -113,13 +113,13 @@ const Premium = () => {
                         width: '100%',
                         fontFamily: "BalsamiqSans_700Bold",
                     }}>Why join Premium?</Text>
-                    <View style={{flexDirection: 'row', alignItems: 'center', padding: 15}}>
+                    <View style={{flexDirection: 'row', alignItems: 'center', padding: 15, overflow: 'hidden'}}>
                         <Entypo name="flash" size={20} color="#90EE90" />
                         <Text
                             style={{
                                 color: "white",
                                 letterSpacing: 1,
-                                fontSize: 15,
+                                fontSize: 13,
                                 fontFamily: "BalsamiqSans_400Regular",
                             }}
                         >
@@ -132,7 +132,7 @@ const Premium = () => {
                             style={{
                                 color: "white",
                                 letterSpacing: 1,
-                                fontSize: 15,
+                                fontSize: 13,
                                 fontFamily: "BalsamiqSans_400Regular",
                             }}
                         >
@@ -145,7 +145,7 @@ const Premium = () => {
                             style={{
                                 color: "white",
                                 letterSpacing: 1,
-                                fontSize: 15,
+                                fontSize: 13,
                                 fontFamily: "BalsamiqSans_400Regular",
                             }}
                         >

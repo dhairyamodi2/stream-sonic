@@ -46,42 +46,6 @@ const Root = function () {
   // const {visited, isAuthenticated, isLoading, message, user} = useSelector<State, AuthState>(state => state.auth)
 
   // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //     console.log('from home')
-  //     console.log(visited);
-  // }, [])
-  // useEffect(() => {
-  //     if (visited === false) {
-  //         console.log('dispatched');
-  //         SecureStore.getItemAsync("token").then((item) => {
-  //             if(!item) {
-  //                 console.log('item')
-  //                 console.log(item);
-  //                 navigator.navigate('Login');
-  //                 return;
-  //             }
-  //             dispatch(me(item) as any)
-  //         })
-  //     }
-  // }, [visited])
-
-  // useEffect(() => {
-  //     if (visited === true && isAuthenticated === false && isLoading === false) {
-  //        navigator.replace('Login');
-  //     }
-
-  //     if (isAuthenticated === true) {
-  //         if (!user){
-  //             navigator.replace('Login');
-  //             return;
-  //         }
-  //         console.log(user.completedProfile);
-  //         if (user.completedProfile === false && visited === true) {
-  //             navigator.replace('Onboarding');
-  //         }
-  //     }
-  // }, [isAuthenticated, isLoading, visited])
   const dispatch = useDispatch();
 
   useEffect(() => {

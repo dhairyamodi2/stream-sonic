@@ -3,7 +3,7 @@ import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 
 const CustomTextInput: React.FC<{
-  setSearchField: (text: string) => Promise<void>;
+  setSearchField:  React.Dispatch<React.SetStateAction<string>>
   search_field: string;
 }> = ({ search_field, setSearchField }) => {
   return (

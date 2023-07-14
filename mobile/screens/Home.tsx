@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from "react-native"
+import { Modal, ScrollView, Text, View } from "react-native"
 import React from "react"
 import { color_scheme, gradient_scheme } from "../constants";
 import { LinearGradient } from 'expo-linear-gradient'
@@ -14,7 +14,7 @@ import { State } from "common/src/store";
 import { useIsFocused } from "@react-navigation/native";
 import { AlbumState } from "common/src/modules/albums/albums.types";
 import { ArtistsState } from "common/src/modules/artists/artists.types";
-import { ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator, Portal } from "react-native-paper";
 
 const Home = function () {
     const { track } = useSelector<State, PlayState>(state => state.playback)
@@ -22,12 +22,11 @@ const Home = function () {
     const tracks = useSelector<State, TrackState>(state => state.tracks)
     const artists = useSelector<State, ArtistsState>(state => state.artists)
     const focus = useIsFocused();
-
     if (albums.isLoading || artists.isLoading || tracks.isLoading) {
         return (
             <LinearGradient colors={gradient_scheme} style={{ flex: 1, padding: 10 }}>
                 <Header />
-                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <ActivityIndicator color={color_scheme} size={50} />
                 </View>
             </LinearGradient>

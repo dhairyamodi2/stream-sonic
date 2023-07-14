@@ -1,7 +1,7 @@
-import { View, Text, Pressable, ScrollView } from 'react-native'
+import { View, Text, Pressable, ScrollView, Touchable, TouchableOpacity, ToastAndroid } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
-import { gradient_scheme } from '../constants'
+import { color_scheme, gradient_scheme } from '../constants'
 import CustomTextInput from '../ui/TextInput'
 import { AntDesign } from '@expo/vector-icons'
 import GenreList from '../modules/genre/GenreList'
@@ -18,6 +18,7 @@ import Tag from '../ui/Tag'
 import TrackInfo from '../modules/tracks/TrackInfo'
 import AlbumInfo from '../modules/albums/AlbumInfo'
 import ArtistInfo from '../modules/artists/ArtistInfo'
+import { ActivityIndicator, Button } from 'react-native-paper'
 
 
 const Search = () => {
@@ -27,11 +28,12 @@ const Search = () => {
     const [artists, setArtists] = useState<Array<User>>([])
     const [albums, setAlbums] = useState<Array<AlbumsWithUser>>([])
     const [tracks, setTracks] = useState<Array<TracksWithArtists>>([]);
-
+    const [loading, setLoading] = useState(false);
     const [tag, setTag] = useState<'tracks' | 'artists' | 'albums'>('tracks');
+    const [tapped, setTapped] = useState(false);
     const handleSearch = async function (text: string) {
-        setSearchField(text);
-
+        setTapped(true);
+        setLoading(true);
         const artists = await fetchArtists({ name: text })
         setArtists(artists.data);
 
@@ -43,20 +45,34 @@ const Search = () => {
 
         const tracks = await fetchTracks({ track_name: text });
         setTracks(tracks.data);
-
-
-
+        setLoading(false);
     }
+    useEffect(() => {
+        return () => {
+            setTapped(false);
+            setSearchField('');
+            setArtists([]);
+            setAlbums([]);
+            setTracks([])
+            setLoading(false);
+        }
+    }, [focus])
     return (
         <LinearGradient colors={gradient_scheme} style={{ flex: 1, padding: 10 }}>
 
             {/* <View> */}
-            <View style={{ height: 70 }}>
-                <CustomTextInput search_field={search_field} setSearchField={handleSearch} />
+            <View style={{ height: 70, flexDirection: 'row', alignItems:'center', justifyContent: 'space-between' }}>
+                <View style={{flex: 1}}>
+                <CustomTextInput search_field={search_field} setSearchField={setSearchField} />
+                </View>
+                <TouchableOpacity style={{marginTop: 10, marginLeft: 10,  backgroundColor: "#F9F4DA", padding: 5, borderRadius: 5}} onPress={() => handleSearch(search_field)}>
+                    <AntDesign name='search1' color={'black'} size={30}></AntDesign>
+                </TouchableOpacity>
             </View>
-            {search_field.length === 0 ? <View style={{ flex: 1 }}>
+            {!tapped ? <View style={{ flex: 1 }}>
                 <GenreList />
             </View> :
+            loading ? <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}><ActivityIndicator color={color_scheme} size={50}></ActivityIndicator></View> : <View style={{flex: 1}}>
                 <View style={{ flex: 1 }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
 
@@ -82,6 +98,7 @@ const Search = () => {
                         </ScrollView>
                     </View>
 
+                </View>
                 </View>
             }
 

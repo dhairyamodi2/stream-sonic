@@ -44,9 +44,9 @@ export default function App() {
           <PaperProvider theme={theme}>
           <RootStack.Navigator screenOptions={{ headerShown: false }}>
           
+            {/* <RootStack.Screen name='Onboarding' component={Onboarding}></RootStack.Screen> */}
             <RootStack.Screen name='Root' component={RootChild}></RootStack.Screen>
-            <RootStack.Screen name='Login' component={LoginView}></RootStack.Screen>
-            <RootStack.Screen name='Onboarding' component={Onboarding}></RootStack.Screen>
+            {/* <RootStack.Screen name='Login' component={LoginView}></RootStack.Screen> */}
           </RootStack.Navigator>
          
           </PaperProvider>
