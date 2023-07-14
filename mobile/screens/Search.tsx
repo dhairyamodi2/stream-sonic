@@ -17,6 +17,7 @@ import { fetchTracks } from 'client/src/modules/tracks/client'
 import Tag from '../ui/Tag'
 import TrackInfo from '../modules/tracks/TrackInfo'
 import AlbumInfo from '../modules/albums/AlbumInfo'
+import ArtistInfo from '../modules/artists/ArtistInfo'
 
 
 const Search = () => {
@@ -67,17 +68,17 @@ const Search = () => {
                     </View>
 
                     <View style={{ flex: 1 }}>
-                        <ScrollView>
+                        <ScrollView keyboardShouldPersistTaps='always'>
                         {tag === 'tracks' && tracks.map((track) => {
                             return <TrackInfo track={track} key={track.track_id} />
                         })}
 
                         {tag === 'albums' && albums.map((album) => {
-                            return <AlbumInfo album={album} user={album.user}/>
+                            return <AlbumInfo album={album} user={album.user} key={album.album_id}/>
                         })}
-                        {/* {tag === 'tracks' && tracks.map((track) => {
-                            return <TrackInfo track={track} key={track.track_id} />
-                        })} */}
+                        {tag === 'artists' && artists.map((artist) => {
+                            return <ArtistInfo  artist={artist} key={artist.user_id}/>
+                        })}
                         </ScrollView>
                     </View>
 

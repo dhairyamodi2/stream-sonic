@@ -1,4 +1,4 @@
-import { View, Text, Image, Pressable } from "react-native";
+import { View, Text, Image, Pressable, ToastAndroid } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { AntDesign, Entypo, FontAwesome5 } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
@@ -122,7 +122,11 @@ const TrackPlayerMini = () => {
                     flex: 0.25,
                 }}
             >
+                <Pressable onPress={(() => {
+                    ToastAndroid.show('Functionality yet to be added', 1000)
+                })}>
                 <FontAwesome5 name="heart" size={24} color="white" />
+                </Pressable>
                 <Pressable onPress={handlePlay}>
                     <Entypo name={playing ? 'controller-paus' : 'controller-play'} size={24} color="white" />
                 </Pressable>

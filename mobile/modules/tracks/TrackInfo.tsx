@@ -1,4 +1,4 @@
-import { View, Text, Image, Pressable } from 'react-native'
+import { View, Text, Image, Pressable, ToastAndroid } from 'react-native'
 import React from 'react'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { Track, TracksWithArtists } from 'api/src/types/Prisma'
@@ -55,8 +55,11 @@ const TrackInfo: React.FC<{ track: TracksWithArtists }> = ({ track }) => {
                     </View>
                 </View>
 
-
+                <Pressable onPress={() => {
+                    ToastAndroid.showWithGravity('Feature not added yet', 1000, 50)
+                }}>
                 <FontAwesome5 name="heart" size={24} color="white" />
+                </Pressable>
 
             </View>
         </Pressable>
